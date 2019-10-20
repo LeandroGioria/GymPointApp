@@ -8,7 +8,9 @@
     "dev:debug": "nodemon --inspect src/server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
