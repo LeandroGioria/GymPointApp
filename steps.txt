@@ -1,3 +1,38 @@
+yarn add express
+Yarn add nodemon -D
+Yarn add eslint
+Yarn eslint —init
+	edit eslintrc.js
+		 extends: [
+    			'airbnb-base',
+   		 	'prettier',
+  		],
+  		plugins: ['prettier'],
+
+		rules: {
+    			"prettier/prettier": "error",
+    			"class-methods-use-this": "off",
+   			 "no-param-reassign": "off",
+   			 "camelcase": "off",
+    			 "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+  		},
+
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+	create file -> .prettierrc
+		{
+    			"singleQuote": true,
+   			 "trailingComma": "es5"
+		}
+
+
+yarn eslint --fix src --ext .js 
+
+Install editorconfig extension
+	right click > generate editorconfig file
+	set two attributes to true
+		trim_trailing_whitespace = true
+		insert_final_newline = true
+
 yarn add sucrase
 create nodemon.json file in the root
 	{
