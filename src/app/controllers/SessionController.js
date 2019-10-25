@@ -1,4 +1,4 @@
-import Yup from 'yup';
+import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import authConfig from '../../config/auth';
@@ -18,7 +18,7 @@ class SessionController {
 
         const { email, password } = req.body;
 
-        const user = User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } });
 
         if (!user) {
             return res.status(401).json({ error: 'User not found' });
