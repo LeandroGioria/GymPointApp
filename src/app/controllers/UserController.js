@@ -1,6 +1,14 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 
+// index – List table data
+// show – Show specfic item
+// create – Return a View to create table item
+// store – Save new item
+// edit – Return a View to edit table item
+// update – Update item
+// destroy – Remove Item
+
 class UserController {
     async store(req, res) {
         const schema = Yup.object().shape({
