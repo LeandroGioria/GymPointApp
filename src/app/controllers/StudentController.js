@@ -1,6 +1,13 @@
 import * as Yup from 'yup';
 import Student from '../models/Student';
 
+// index – List table data
+// show – Show specfic item
+// create – Return a View to create table item
+// store – Save new item
+// edit – Return a View to edit table item
+// update – Update item
+// destroy – Remove Item
 class StudentController {
     async store(req, res) {
         const schema = Yup.object().shape({
@@ -17,15 +24,15 @@ class StudentController {
             return res.status(400).json({ error: 'Validation fails' });
         }
 
-        const studentExists = await Student.findOne({
-            where: { email: req.body.email },
-        });
+        const { email } = req.body;
 
-        if (studentExists) {
+        const student = await Student.findOne({ where: { email } });
+
+        if (student) {
             return res.status(400).json({ error: 'User already exists' });
         }
 
-        const { name, email, age } = await Student.create(req.body);
+        const { name, age } = await Student.create(req.body);
 
         return res.json({ name, email, age });
     }
@@ -64,9 +71,12 @@ class StudentController {
             }
         }
 
-        const { name, email, age, peso, altura } = student.update(req.body);
+        student.update(req.body);
 
-        return res.json({ name, email, age, peso, altura });
+        return res.json({
+            status: 'ok',
+            msg: `Student ${student.name} updated!`,
+        });
     }
 }
 

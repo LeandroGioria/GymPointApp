@@ -3,7 +3,7 @@ import databaseConfig from '../config/database';
 import user from '../app/models/User';
 import student from '../app/models/Student';
 
-const models = [user, student];
+const models = [student, user];
 
 class Database {
     constructor() {
