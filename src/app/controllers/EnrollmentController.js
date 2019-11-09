@@ -42,7 +42,7 @@ class EnrollmentController {
             });
         }
 
-        const studentHasEnrollment = Enrollment.findOne({
+        const studentHasEnrollment = await Enrollment.findOne({
             where: { student_id: req.body.student_id },
         });
 
@@ -105,27 +105,27 @@ class EnrollmentController {
     //     });
     // }
 
-    // async delete(req, res) {
-    //     const isAdmin = await User.findOne({ where: { id: req.userId } });
+    async delete(req, res) {
+        const isAdmin = await User.findOne({ where: { id: req.userId } });
 
-    //     if (!isAdmin) {
-    //         return res.status(401).json({
-    //             error: 'Only administrators can delete plans',
-    //         });
-    //     }
+        if (!isAdmin) {
+            return res.status(401).json({
+                error: 'Only administrators can delete enrollments',
+            });
+        }
 
-    //     const plan = await Plan.findByPk(req.params.id);
+        const enrollment = await Enrollment.findByPk(req.params.id);
 
-    //     if (!plan) {
-    //         return res.status(400).json({ error: 'Plan does not exists' });
-    //     }
+        if (!enrollment) {
+            return res
+                .status(400)
+                .json({ error: 'Enrollment does not exists' });
+        }
 
-    //     const planName = plan.title;
+        enrollment.destroy();
 
-    //     plan.destroy();
-
-    //     return res.json({ ok: `Plan "${planName}" deleted with success!` });
-    // }
+        return res.json({ ok: 'Enrollment deleted with success!' });
+    }
 }
 
 export default new EnrollmentController();
