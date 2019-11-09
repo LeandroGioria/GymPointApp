@@ -1,8 +1,11 @@
 import * as Yup from 'yup';
-import { addMonths, parseISO, isBefore } from 'date-fns';
+import { addMonths, parseISO, isBefore, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Enrollment from '../models/Enrollment';
 import User from '../models/User';
 import Plan from '../models/Plan';
+import Mail from '../../lib/Mail';
+import Student from '../models/Student';
 
 class EnrollmentController {
     async index(req, res) {
@@ -77,6 +80,29 @@ class EnrollmentController {
             start_date,
             end_date,
             price,
+        });
+
+        const student = await Student.findByPk(req.body.student_id);
+
+        if (!student) {
+            return res.status(400).json({ error: 'Student not found' });
+        }
+
+        await Mail.sendMail({
+            to: `${student.name} <${student.email}>`,
+            subject: 'Matrícula GymPoint',
+            template: 'enrollment',
+            context: {
+                student: student.name,
+                plan: plan.title,
+                price: plan.price,
+                startDate: format(start_date, "'dia' dd 'de' MMMM 'de' yyyy", {
+                    locale: pt,
+                }),
+                endDate: format(end_date, "'dia' dd 'de' MMMM 'de' yyyy", {
+                    locale: pt,
+                }),
+            },
         });
 
         return res.json(enrollment);
