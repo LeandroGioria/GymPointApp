@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { addMonths, parseISO } from 'date-fns';
+import { addMonths, parseISO, isBefore } from 'date-fns';
 import Enrollment from '../models/Enrollment';
 import User from '../models/User';
 import Plan from '../models/Plan';
@@ -57,8 +57,18 @@ class EnrollmentController {
             return res.status(400).json({ error: 'Plan not found' });
         }
 
-        const price = plan.price * plan.duration;
+        /**
+         * Check for past dates
+         */
         const start_date = parseISO(req.body.start_date);
+
+        if (isBefore(start_date, new Date())) {
+            return res
+                .status(400)
+                .json({ error: 'Past dates are not permitted' });
+        }
+
+        const price = plan.price * plan.duration;
         const end_date = addMonths(start_date, plan.duration);
 
         const enrollment = await Enrollment.create({
@@ -72,38 +82,64 @@ class EnrollmentController {
         return res.json(enrollment);
     }
 
-    // async update(req, res) {
-    //     const schema = Yup.object().shape({
-    //         title: Yup.string(),
-    //         duration: Yup.number(),
-    //         price: Yup.number(),
-    //     });
+    async update(req, res) {
+        const schema = Yup.object().shape({
+            id: Yup.number().required(),
+            student_id: Yup.number(),
+            plan_id: Yup.number(),
+            start_date: Yup.date(),
+        });
 
-    //     if (!(await schema.isValid(req.body))) {
-    //         return res.status(400).json({ error: 'Validation fails' });
-    //     }
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({ error: 'Validation fails' });
+        }
 
-    //     const isAdmin = await User.findOne({ where: { id: req.userId } });
+        const isAdmin = await User.findOne({ where: { id: req.userId } });
 
-    //     if (!isAdmin) {
-    //         return res.status(401).json({
-    //             error: 'You can only update plans as administrator',
-    //         });
-    //     }
+        if (!isAdmin) {
+            return res.status(401).json({
+                error: 'You can only update plans as administrator',
+            });
+        }
 
-    //     const plan = await Plan.findByPk(req.body.id);
+        const enrollment = await Enrollment.findByPk(req.body.id);
 
-    //     if (!plan) {
-    //         return res.status(400).json({ error: 'Plan not found' });
-    //     }
+        if (!enrollment) {
+            return res.status(400).json({ error: 'Enrollment not found' });
+        }
 
-    //     plan.update(req.body);
+        const plan = await Plan.findByPk(req.body.plan_id);
+        if (!plan) {
+            return res.status(400).json({ error: 'Plan id not found' });
+        }
 
-    //     return res.json({
-    //         status: 'ok',
-    //         msg: `Student ${plan.title} updated!`,
-    //     });
-    // }
+        /**
+         * Check for past dates
+         */
+        const start_date = parseISO(req.body.start_date);
+
+        if (isBefore(start_date, new Date())) {
+            return res
+                .status(400)
+                .json({ error: 'Past dates are not permitted' });
+        }
+
+        const price = plan.price * plan.duration;
+        const end_date = addMonths(start_date, plan.duration);
+
+        enrollment.update({
+            student_id: req.body.student_id,
+            plan_id: req.body.plan_id,
+            start_date,
+            end_date,
+            price,
+        });
+
+        return res.json({
+            status: 'ok',
+            msg: 'Enrollment updated!',
+        });
+    }
 
     async delete(req, res) {
         const isAdmin = await User.findOne({ where: { id: req.userId } });
