@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
-import { addMonths, parseISO, isBefore, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import { addMonths, parseISO, isBefore } from 'date-fns';
 import Enrollment from '../models/Enrollment';
 import User from '../models/User';
 import Plan from '../models/Plan';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
 import Student from '../models/Student';
+import EnrollmentMail from '../jobs/EnrollmentMail';
+import EnrollmentUpdateMail from '../jobs/EnrollmentUpdateMail';
 
 class EnrollmentController {
     async index(req, res) {
@@ -88,21 +89,11 @@ class EnrollmentController {
             return res.status(400).json({ error: 'Student not found' });
         }
 
-        await Mail.sendMail({
-            to: `${student.name} <${student.email}>`,
-            subject: 'Matrícula GymPoint',
-            template: 'enrollment',
-            context: {
-                student: student.name,
-                plan: plan.title,
-                price: plan.price,
-                startDate: format(start_date, "'dia' dd 'de' MMMM 'de' yyyy", {
-                    locale: pt,
-                }),
-                endDate: format(end_date, "'dia' dd 'de' MMMM 'de' yyyy", {
-                    locale: pt,
-                }),
-            },
+        await Queue.add(EnrollmentMail.key, {
+            student,
+            plan,
+            start_date,
+            end_date,
         });
 
         return res.json(enrollment);
@@ -167,21 +158,11 @@ class EnrollmentController {
             return res.status(400).json({ error: 'Student not found' });
         }
 
-        await Mail.sendMail({
-            to: `${student.name} <${student.email}>`,
-            subject: 'Matrícula Atualizada - GymPoint',
-            template: 'enrollmentUpdate',
-            context: {
-                student: student.name,
-                plan: plan.title,
-                price: plan.price,
-                startDate: format(start_date, "'dia' dd 'de' MMMM 'de' yyyy", {
-                    locale: pt,
-                }),
-                endDate: format(end_date, "'dia' dd 'de' MMMM 'de' yyyy", {
-                    locale: pt,
-                }),
-            },
+        await Queue.add(EnrollmentUpdateMail.key, {
+            student,
+            plan,
+            start_date,
+            end_date,
         });
 
         return res.json({
