@@ -161,6 +161,29 @@ class EnrollmentController {
             price,
         });
 
+        const student = await Student.findByPk(req.body.student_id);
+
+        if (!student) {
+            return res.status(400).json({ error: 'Student not found' });
+        }
+
+        await Mail.sendMail({
+            to: `${student.name} <${student.email}>`,
+            subject: 'Matrícula Atualizada - GymPoint',
+            template: 'enrollmentUpdate',
+            context: {
+                student: student.name,
+                plan: plan.title,
+                price: plan.price,
+                startDate: format(start_date, "'dia' dd 'de' MMMM 'de' yyyy", {
+                    locale: pt,
+                }),
+                endDate: format(end_date, "'dia' dd 'de' MMMM 'de' yyyy", {
+                    locale: pt,
+                }),
+            },
+        });
+
         return res.json({
             status: 'ok',
             msg: 'Enrollment updated!',
