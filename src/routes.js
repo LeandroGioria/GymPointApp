@@ -5,6 +5,7 @@ import StudentController from './app/controllers/StudentController';
 import authMiddleware from './app/middlewares/auth';
 import PlanController from './app/controllers/PlanController';
 import EnrollmentController from './app/controllers/EnrollmentController';
+import CheckinController from './app/controllers/CheckinController';
 
 const routes = new Router();
 
@@ -13,6 +14,9 @@ routes.get('/', (req, res) => {
 });
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+
+routes.get('/students/:student_id/checkins', CheckinController.index);
+routes.post('/students/:student_id/checkins', CheckinController.store);
 
 // Only the routes below will use the middleware auth
 routes.use(authMiddleware);

@@ -39,7 +39,6 @@ class EnrollmentController {
         }
 
         const isAdmin = await User.findOne({ where: { id: req.userId } });
-
         if (!isAdmin) {
             return res.status(401).json({
                 error: 'You can only create enrollments as administrator',
@@ -49,7 +48,6 @@ class EnrollmentController {
         const studentHasEnrollment = await Enrollment.findOne({
             where: { student_id: req.body.student_id },
         });
-
         if (studentHasEnrollment) {
             return res
                 .status(401)
@@ -84,7 +82,6 @@ class EnrollmentController {
         });
 
         const student = await Student.findByPk(req.body.student_id);
-
         if (!student) {
             return res.status(400).json({ error: 'Student not found' });
         }

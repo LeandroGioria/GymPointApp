@@ -16,7 +16,7 @@ class PlanController {
             attributes: ['title', 'price', 'duration'],
         });
 
-        if (!plans) {
+        if (!plans || plans.length === 0) {
             return res.status(401).json({ error: 'No plans registered' });
         }
 
@@ -29,13 +29,11 @@ class PlanController {
             duration: Yup.number().required(),
             price: Yup.number().required(),
         });
-
         if (!(await schema.isValid(req.body))) {
             return res.status(400).json({ error: 'Validation fails' });
         }
 
         const isAdmin = await User.findOne({ where: { id: req.userId } });
-
         if (!isAdmin) {
             return res.status(401).json({
                 error: 'You can only create plans as administrator',
@@ -45,7 +43,6 @@ class PlanController {
         const alreadyExists = await Plan.findOne({
             where: { title: req.body.title },
         });
-
         if (alreadyExists) {
             return res.status(400).json({ error: 'Plan already exists' });
         }
@@ -67,7 +64,6 @@ class PlanController {
         }
 
         const isAdmin = await User.findOne({ where: { id: req.userId } });
-
         if (!isAdmin) {
             return res.status(401).json({
                 error: 'You can only update plans as administrator',
@@ -75,7 +71,6 @@ class PlanController {
         }
 
         const plan = await Plan.findByPk(req.body.id);
-
         if (!plan) {
             return res.status(400).json({ error: 'Plan not found' });
         }
@@ -98,16 +93,13 @@ class PlanController {
         }
 
         const plan = await Plan.findByPk(req.params.id);
-
         if (!plan) {
             return res.status(400).json({ error: 'Plan does not exists' });
         }
 
-        const planName = plan.title;
-
         plan.destroy();
 
-        return res.json({ ok: `Plan "${planName}" deleted with success!` });
+        return res.json({ ok: `Plan "${plan.title}" deleted with success!` });
     }
 }
 
