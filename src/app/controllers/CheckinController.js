@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { isSameWeek, parseISO } from 'date-fns';
+import { isSameWeek } from 'date-fns';
 import Checkin from '../models/Checkin';
 import Student from '../models/Student';
 
