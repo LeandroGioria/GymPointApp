@@ -24,8 +24,10 @@ routes.get('/students/:student_id/help-orders', HelpOrderController.show);
 
 // Only the routes below will use the middleware auth
 routes.use(authMiddleware);
+
+routes.get('/students', StudentController.index);
 routes.post('/students', StudentController.store);
-routes.put('/students', StudentController.update);
+routes.put('/students/:name', StudentController.update);
 
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);

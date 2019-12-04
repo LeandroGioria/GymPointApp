@@ -18,7 +18,9 @@ class EnrollmentController {
             });
         }
 
-        const enrollments = await Enrollment.findAll();
+        const enrollments = await Enrollment.findAll({
+            attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+        });
 
         if (!enrollments) {
             return res.status(401).json({ error: 'No enrollments registered' });

@@ -1,5 +1,8 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+
 import Student from '../models/Student';
+import User from '../models/User';
 
 // index – List table data
 // show – Show specfic item
@@ -9,6 +12,31 @@ import Student from '../models/Student';
 // update – Update item
 // destroy – Remove Item
 class StudentController {
+    async index(req, res) {
+        const isAdmin = User.findOne({ where: { id: req.userId } });
+
+        if (!isAdmin) {
+            return res.status(401).json({
+                error: 'You can only list plans as administrator',
+            });
+        }
+
+        const studentParam = req.query.name ? req.query.name : '';
+        const students = await Student.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${studentParam}%`,
+                },
+            },
+        });
+
+        if (!students) {
+            return res.status(401).json({ error: 'No students found' });
+        }
+
+        return res.json(students);
+    }
+
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
