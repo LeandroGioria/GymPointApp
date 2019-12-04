@@ -21,11 +21,10 @@ class StudentController {
             });
         }
 
-        const studentParam = req.query.name ? req.query.name : '';
         const students = await Student.findAll({
             where: {
                 name: {
-                    [Op.like]: `%${studentParam}%`,
+                    [Op.like]: `%${req.query.name}%`,
                 },
             },
         });
