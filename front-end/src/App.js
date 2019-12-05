@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Router } from 'react-router-dom';
 import history from './services/history';
-
+import './config/ReactotronConfig';
 import Routes from './routes';
 
 import GlobalStyle from './styles/global';
