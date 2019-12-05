@@ -42,14 +42,15 @@ export const Content = styled.div`
     margin-left: 30px;
 
     span {
-      width: 77px;
+      width: 300px;
       height: 17px;
       color: #444444;
       font-family: Roboto;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: bold;
       text-transform: uppercase;
-      margin-top: 20px;
+      margin-top: 10px;
+      text-align: left;
     }
 
     input {
