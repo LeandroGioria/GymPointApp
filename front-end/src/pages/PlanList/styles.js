@@ -41,14 +41,6 @@ export const Container = styled.div`
           font-weight: bold;
         }
       }
-
-      input {
-        padding-left: 30px;
-        width: 237px;
-        border-radius: 4px;
-        border: 1px solid #dddddd;
-        background: #ffffff;
-      }
     }
   }
 `;

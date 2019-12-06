@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
-import { Container, StudentTable } from './styles';
+// import { MdSearch } from 'react-icons/md';
+import { Input } from '@rocketseat/unform';
+import { Container, StudentTable, EditDelete } from './styles';
 
 export default function StudentList() {
   return (
@@ -9,10 +11,11 @@ export default function StudentList() {
       <header>
         <strong>Gerenciamento alunos</strong>
         <aside>
-          <button type="button">
+          <Link to="/student/form">
             <IoMdAdd size={20} color="#fff" />
-            <Link to="/students/form">CADASTRAR</Link>
-          </button>
+            <strong>CADASTRAR</strong>
+          </Link>
+          <Input name="search" placeholder="Buscar Aluno" />
         </aside>
       </header>
       <StudentTable>
@@ -35,12 +38,37 @@ export default function StudentList() {
               <span>20</span>
             </td>
             <td>
-              <Link to="/students/edit" edit>
-                editar
-              </Link>
+              <EditDelete edit>
+                <Link to="/student/edit" edit>
+                  editar
+                </Link>
+              </EditDelete>
             </td>
             <td>
-              <Link to="/">apagar</Link>
+              <EditDelete>
+                <Link to="/">apagar</Link>
+              </EditDelete>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>Cha Ji-Hun2</span>
+            </td>
+            <td>
+              <span>example@rocketseat.com.br</span>
+            </td>
+            <td>
+              <span>20</span>
+            </td>
+            <td>
+              <EditDelete edit>
+                <Link to="/student/edit">editar</Link>
+              </EditDelete>
+            </td>
+            <td>
+              <EditDelete>
+                <Link to="/">apagar</Link>
+              </EditDelete>
             </td>
           </tr>
           <tr>
@@ -54,27 +82,14 @@ export default function StudentList() {
               <span>20</span>
             </td>
             <td>
-              <Link to="/students/edit">editar</Link>
+              <EditDelete edit>
+                <Link to="/student/edit">editar</Link>
+              </EditDelete>
             </td>
             <td>
-              <Link to="/">apagar</Link>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Cha Ji-Hun</span>
-            </td>
-            <td>
-              <span>example@rocketseat.com.br</span>
-            </td>
-            <td>
-              <span>20</span>
-            </td>
-            <td>
-              <Link to="/students/edit">editar</Link>
-            </td>
-            <td>
-              <Link to="/">apagar</Link>
+              <EditDelete>
+                <Link to="/">apagar</Link>
+              </EditDelete>
             </td>
           </tr>
         </tbody>
