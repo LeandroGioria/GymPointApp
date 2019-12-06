@@ -13,10 +13,10 @@ export default function Header() {
           <img src={logo} alt="GymPoint" />
           <Link to="/">GYMPOINT</Link>
           <div>
-            <Link to="/student/list">ALUNOS</Link>
-            <Link to="/student/list">PLANOS</Link>
-            <Link to="/student/list">MATRÍCULAS</Link>
-            <Link to="/student/list">PEDIDOS DE AUXÍLIO</Link>
+            <Link to="/students">ALUNOS</Link>
+            <Link to="/plans">PLANOS</Link>
+            <Link to="/enrollments">MATRÍCULAS</Link>
+            <Link to="/help">PEDIDOS DE AUXÍLIO</Link>
           </div>
         </nav>
 

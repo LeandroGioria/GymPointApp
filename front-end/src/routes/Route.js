@@ -18,11 +18,10 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/student/list" />;
+    return <Redirect to="/students" />;
   }
 
   const Layout = signed ? DefaultLayout : AuthLayout;
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return (
     <Route
       {...rest}
