@@ -30,7 +30,7 @@ export default function HelpOrderList() {
               >
                 {close => (
                   <div>
-                    <a className="close" onClick={close}>
+                    <a href="/helps" className="close" onClick={close}>
                       &times;
                     </a>
                     <FeedBack />
@@ -53,7 +53,7 @@ export default function HelpOrderList() {
               >
                 {close => (
                   <div>
-                    <a className="close" onClick={close}>
+                    <a href="/helps" className="close" onClick={close}>
                       &times;
                     </a>
                     <FeedBack />
@@ -76,7 +76,7 @@ export default function HelpOrderList() {
               >
                 {close => (
                   <div>
-                    <a className="close" onClick={close}>
+                    <a href="/helps" className="close" onClick={close}>
                       &times;
                     </a>
                     <FeedBack />
