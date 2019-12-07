@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Modal from 'reactjs-popup';
+import FeedBack from '../Feedback';
 import { Container, HelpOrderTable } from './styles';
 
 export default function HelpOrderList() {
@@ -16,33 +17,72 @@ export default function HelpOrderList() {
           <tr>
             <td>
               <span>Leandro Gioria</span>
-              <Link to="/help/feedback" edit>
-                responder
-              </Link>
+              <Modal
+                style={{ width: '400px' }}
+                className="popup-wrapper"
+                trigger={
+                  <button type="button" button>
+                    responder
+                  </button>
+                }
+                modal
+                closeOnDocumentClick
+              >
+                {close => (
+                  <div>
+                    <a className="close" onClick={close}>
+                      &times;
+                    </a>
+                    <FeedBack />
+                  </div>
+                )}
+              </Modal>
             </td>
-          </tr>
-          <tr>
             <td>
               <span>Leandro Gioria</span>
-              <Link to="/help/feedback" edit>
-                responder
-              </Link>
+              <Modal
+                style={{ width: '400px' }}
+                className="popup-wrapper"
+                trigger={
+                  <button type="button" button>
+                    responder
+                  </button>
+                }
+                modal
+                closeOnDocumentClick
+              >
+                {close => (
+                  <div>
+                    <a className="close" onClick={close}>
+                      &times;
+                    </a>
+                    <FeedBack />
+                  </div>
+                )}
+              </Modal>
             </td>
-          </tr>
-          <tr>
             <td>
               <span>Leandro Gioria</span>
-              <Link to="/help/feedback" edit>
-                responder
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Leandro Gioria</span>
-              <Link to="/help/feedback" edit>
-                responder
-              </Link>
+              <Modal
+                style={{ width: '400px' }}
+                className="popup-wrapper"
+                trigger={
+                  <button type="button" button>
+                    responder
+                  </button>
+                }
+                modal
+                closeOnDocumentClick
+              >
+                {close => (
+                  <div>
+                    <a className="close" onClick={close}>
+                      &times;
+                    </a>
+                    <FeedBack />
+                  </div>
+                )}
+              </Modal>
             </td>
           </tr>
         </tbody>

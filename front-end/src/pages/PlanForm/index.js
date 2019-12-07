@@ -12,7 +12,7 @@ export default function Plans() {
       <header>
         <strong>Cadastro de plano</strong>
         <aside>
-          <Link to="/students">
+          <Link to="/plans">
             <MdChevronLeft size={20} color="#fff" />
             <strong>VOLTAR</strong>
           </Link>

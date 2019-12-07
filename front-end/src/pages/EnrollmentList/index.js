@@ -10,7 +10,7 @@ export default function EnrollmentList() {
       <header>
         <strong>Gerenciamento matrículas</strong>
         <aside>
-          <Link to="/plan/form">
+          <Link to="/enrollment/form">
             <IoMdAdd size={20} color="#fff" />
             <strong>CADASTRAR</strong>
           </Link>

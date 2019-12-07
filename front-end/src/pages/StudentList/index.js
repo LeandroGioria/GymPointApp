@@ -15,7 +15,7 @@ export default function StudentList() {
             <IoMdAdd size={20} color="#fff" />
             <strong>CADASTRAR</strong>
           </Link>
-          <Input name="search" placeholder="Buscar Aluno" />
+          <Input name="search" type="search" placeholder="Buscar Aluno" />
         </aside>
       </header>
       <StudentTable>

@@ -37,8 +37,12 @@ export const HelpOrderTable = styled.table`
       padding: 15px;
       border-top: 1px solid #eee;
 
-      a {
+      > button {
         color: #4d85ee;
+        border: none;
+        background: #fff;
+        font-size: 15px;
+        font-family: Roboto, sans-serif;
       }
     }
   }
