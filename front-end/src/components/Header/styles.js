@@ -15,33 +15,34 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
 
-    img {
-      width: 46px;
-      height: 24px;
-      margin-right: 12px;
-    }
-
     > a {
-      width: 77px;
-      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 24px;
       color: #ee4d64;
       font-size: 15px;
       font-weight: bold;
-      text-transform: uppercase;
       border-right: 1px solid #eee;
-      margin-right: 20px;
+      margin-right: 30px;
+      padding-right: 30px;
+
+      img {
+        width: 46px;
+        height: 24px;
+        margin-right: 12px;
+      }
     }
 
-    div {
-      a {
-        width: 144px;
-        height: 18px;
-        color: #999999;
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-right: 20px;
-      }
+    div a {
+      width: 144px;
+      height: 18px;
+      color: #999999;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-right: 20px;
     }
   }
 

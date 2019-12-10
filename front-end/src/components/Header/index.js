@@ -10,8 +10,10 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="GymPoint" />
-          <Link to="/">GYMPOINT</Link>
+          <Link to="/">
+            <img src={logo} alt="GymPoint" />
+            <strong>GYMPOINT</strong>
+          </Link>
           <div>
             <Link to="/students">ALUNOS</Link>
             <Link to="/plans">PLANOS</Link>
