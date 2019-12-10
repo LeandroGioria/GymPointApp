@@ -16,7 +16,7 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user) {
-      toast.error('Usuário não encontrado');
+      toast.error('Usuário ou Senha inválida');
       return;
     }
 
@@ -26,7 +26,7 @@ export function* signIn({ payload }) {
     yield put(signInSuccess(token, user));
     history.push('/students');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados');
+    toast.error('Falha na autenticação');
     yield put(signFailure());
   }
 }
@@ -49,4 +49,5 @@ export function signOut() {
 export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_OUT', signOut),
+  takeLatest('persist/REHYDRATE', setToken),
 ]);

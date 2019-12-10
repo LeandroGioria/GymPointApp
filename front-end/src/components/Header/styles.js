@@ -70,11 +70,13 @@ export const Profile = styled.div`
       font-weight: 700;
     }
 
-    a {
+    button {
       display: block;
       color: #de3b3b;
       font-size: 14px;
       font-weight: 400;
+      border: none;
+      background: #fff;
     }
   }
 `;
