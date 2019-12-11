@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
 import { MdCheckCircle } from 'react-icons/md';
+import { parseISO, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { toast } from 'react-toastify';
+import api from '../../services/api';
 import { Container, EnrollmentTable, EditDelete } from './styles';
 
 export default function EnrollmentList() {
+  const [enrollments, setEnrollments] = useState([]);
+
+  useEffect(() => {
+    async function loadEnrollments() {
+      const response = await api.get('enrollments');
+
+      if (!response.data) {
+        toast.error('Erro no servidor');
+      }
+
+      setEnrollments(response.data);
+    }
+
+    loadEnrollments();
+  }, []);
   return (
     <Container>
       <header>
@@ -27,78 +46,51 @@ export default function EnrollmentList() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <span>Leandro Gioria</span>
-            </td>
-            <td>
-              <span>Diamond</span>
-            </td>
-            <td>
-              <span>30 de Abril de 2019</span>
-            </td>
-            <td>
-              <span>30 de Maio de 2019</span>
-            </td>
-            <td>
-              <MdCheckCircle size={20} color="#42cb59" />
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/plan/edit" edit>
-                  editar
-                </Link>
-              </EditDelete>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Leandro Gioria</span>
-            </td>
-            <td>
-              <span>Diamond</span>
-            </td>
-            <td>
-              <span>30 de Abril de 2019</span>
-            </td>
-            <td>
-              <span>30 de Maio de 2019</span>
-            </td>
-            <td>
-              <MdCheckCircle size={20} color="#42cb59" />
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/plan/edit" edit>
-                  editar
-                </Link>
-              </EditDelete>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Leandro Gioria</span>
-            </td>
-            <td>
-              <span>Diamond</span>
-            </td>
-            <td>
-              <span>30 de Abril de 2019</span>
-            </td>
-            <td>
-              <span>30 de Maio de 2019</span>
-            </td>
-            <td>
-              <MdCheckCircle size={20} color="#42cb59" />
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/plan/edit" edit>
-                  editar
-                </Link>
-              </EditDelete>
-            </td>
-          </tr>
+          {enrollments.map(enrollment => (
+            <tr>
+              <td>
+                <span>{enrollment.student.name}</span>
+              </td>
+              <td>
+                <span>{enrollment.plan.title}</span>
+              </td>
+              <td>
+                <span>
+                  {format(
+                    parseISO(enrollment.start_date),
+                    "dd 'de' MMMM 'de' yyyy",
+                    {
+                      locale: pt,
+                    }
+                  )}
+                </span>
+              </td>
+              <td>
+                <span>
+                  {format(
+                    parseISO(enrollment.end_date),
+                    "dd 'de' MMMM 'de' yyyy",
+                    {
+                      locale: pt,
+                    }
+                  )}
+                </span>
+              </td>
+              <td>
+                <MdCheckCircle
+                  size={20}
+                  color={enrollment.active ? '#42cb59' : '#ccc'}
+                />
+              </td>
+              <td>
+                <EditDelete edit>
+                  <Link to="/plan/edit" edit>
+                    editar
+                  </Link>
+                </EditDelete>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </EnrollmentTable>
     </Container>
