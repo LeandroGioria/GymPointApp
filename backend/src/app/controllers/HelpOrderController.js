@@ -52,7 +52,7 @@ class HelpOrderController {
 
     async update(req, res) {
         const schema = Yup.object().shape({
-            answer: Yup.number().required(),
+            answer: Yup.string().required(),
         });
 
         if (!schema.isValid(req.body)) {
