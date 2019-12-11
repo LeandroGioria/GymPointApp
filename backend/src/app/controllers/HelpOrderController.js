@@ -6,7 +6,16 @@ import Queue from '../../lib/Queue';
 
 class HelpOrderController {
     async index(req, res) {
-        const helpOrders = await HelpOrder.findAll({ where: { answer: null } });
+        const helpOrders = await HelpOrder.findAll({
+            where: { answer: null },
+            include: [
+                {
+                    model: Student,
+                    as: 'student',
+                    attributes: ['name'],
+                },
+            ],
+        });
         if (!helpOrders || helpOrders.length === 0) {
             return res.status(400).json({ error: 'You dont have new orders ' });
         }
