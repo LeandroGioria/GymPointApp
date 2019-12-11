@@ -70,7 +70,10 @@ export const StudentTable = styled.table`
 `;
 
 export const EditDelete = styled.div`
-  a {
+  button {
+    border: none;
+    background: #fff;
+    font-weight: bold;
     color: ${props => (props.edit ? '#4d85ee' : '#de3b3b')};
   }
 `;
