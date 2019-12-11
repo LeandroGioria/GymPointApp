@@ -20,7 +20,7 @@ export default function StudentList() {
       const response = await api.get('students', { params: { name: '' } });
 
       if (!response.data) {
-        toast.error('Could not get users');
+        toast.error('Erro no servidor');
       }
 
       setStudents(response.data);
