@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
 // import { MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
+import api from '../../services/api';
+
 import { Container, StudentTable, EditDelete } from './styles';
 
 export default function StudentList() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    async function loadStudents() {
+      const response = await api.get('students', { params: { name: '' } });
+
+      if (!response.data) {
+        toast.error('Could not get users');
+      }
+
+      setStudents(response.data);
+    }
+
+    loadStudents();
+  }, []);
+
   return (
     <Container>
       <header>
@@ -27,71 +46,31 @@ export default function StudentList() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <span>Cha Ji-Hun</span>
-            </td>
-            <td>
-              <span>example@rocketseat.com.br</span>
-            </td>
-            <td>
-              <span>20</span>
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/student/edit" edit>
-                  editar
-                </Link>
-              </EditDelete>
-            </td>
-            <td>
-              <EditDelete>
-                <Link to="/">apagar</Link>
-              </EditDelete>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Cha Ji-Hun2</span>
-            </td>
-            <td>
-              <span>example@rocketseat.com.br</span>
-            </td>
-            <td>
-              <span>20</span>
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/student/edit">editar</Link>
-              </EditDelete>
-            </td>
-            <td>
-              <EditDelete>
-                <Link to="/">apagar</Link>
-              </EditDelete>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>Cha Ji-Hun</span>
-            </td>
-            <td>
-              <span>example@rocketseat.com.br</span>
-            </td>
-            <td>
-              <span>20</span>
-            </td>
-            <td>
-              <EditDelete edit>
-                <Link to="/student/edit">editar</Link>
-              </EditDelete>
-            </td>
-            <td>
-              <EditDelete>
-                <Link to="/">apagar</Link>
-              </EditDelete>
-            </td>
-          </tr>
+          {students.map(student => (
+            <tr>
+              <td>
+                <span>{student.name}</span>
+              </td>
+              <td>
+                <span>{student.email}</span>
+              </td>
+              <td>
+                <span>{student.age}</span>
+              </td>
+              <td>
+                <EditDelete edit>
+                  <Link to="/student/edit" edit>
+                    editar
+                  </Link>
+                </EditDelete>
+              </td>
+              <td>
+                <EditDelete>
+                  <Link to="/">apagar</Link>
+                </EditDelete>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </StudentTable>
     </Container>
