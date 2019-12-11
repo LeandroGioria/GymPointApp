@@ -105,6 +105,27 @@ class StudentController {
             msg: `Student ${student.name} updated!`,
         });
     }
+    
+    async delete(req, res) {
+        const isAdmin = await User.findOne({ where: { id: req.userId } });
+
+        if (!isAdmin) {
+            return res.status(401).json({
+                error: 'Only administrators can delete students',
+            });
+        }
+
+        const student = await Student.findByPk(req.params.id);
+        if (!student) {
+            return res.status(400).json({ error: 'Student does not exists' });
+        }
+
+        student.destroy();
+
+        return res.json({
+            ok: `Student "${student.name}" deleted with success!`,
+        });
+    }
 }
 
 export default new StudentController();
