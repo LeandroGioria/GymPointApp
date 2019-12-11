@@ -13,7 +13,7 @@ class PlanController {
         }
 
         const plans = await Plan.findAll({
-            attributes: ['title', 'price', 'duration'],
+            attributes: ['id', 'title', 'price', 'duration'],
         });
 
         if (!plans || plans.length === 0) {
@@ -89,6 +89,12 @@ class PlanController {
         if (!isAdmin) {
             return res.status(401).json({
                 error: 'Only administrators can delete plans',
+            });
+        }
+
+        if (req.params.id === 'undefined') {
+            return res.status(401).json({
+                error: 'Invalid id',
             });
         }
 

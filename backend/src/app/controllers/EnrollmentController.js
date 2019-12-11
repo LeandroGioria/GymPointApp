@@ -179,6 +179,12 @@ class EnrollmentController {
             });
         }
 
+        if (!req.params.id) {
+            return res.status(401).json({
+                error: 'Invalid id',
+            });
+        }
+
         const enrollment = await Enrollment.findByPk(req.params.id);
 
         if (!enrollment) {
