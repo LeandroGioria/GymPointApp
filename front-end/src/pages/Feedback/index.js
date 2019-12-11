@@ -1,32 +1,34 @@
 import React from 'react';
-
-import { Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
+import { Input, Form } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
+import api from '../../services/api';
+import history from '../../services/history';
 import { Container, Scroll } from './styles';
 
-export default function Feedback() {
+export default function Feedback({ id, question }) {
+  async function handleSubmit({ resposta }) {
+    await api.put(`help-orders/${id}/answer`, { answer: resposta });
+    toast.success('Resposta enviada!');
+    history.push('/');
+    history.push('/helps');
+  }
+
   return (
     <Container>
       <span>PERGUNTA DO ALUNO</span>
-      <Scroll>
-        Olá pessoal da academia, gostaria de saber se quando acordar devo
-        ingerir batata doce e frango logo de primeira, preparar as marmitas e
-        lotar a geladeira? Dooal da academia, gostaria de saber se quando
-        acordar devo ingerir bataoal da academia, gostaria de saber se quando
-        acordar devo ingerir batata doce e frango logo de primeira, preparar as
-        marmitas e lotar a geladeira? Douoal da academia, gostaria de saber se
-        quando acordar devo ingerir batata doce e frango logo de primeira,
-        preparar as marmitas e lotar a geladeira? Douoal da academia, gostaria
-        de saber se quando acordar devo ingerir batata doce e frango logo de
-        primeira, preparar as marmitas e lotar a geladeira? Douta doce e frango
-        logo de primeira, preparar as marmitas e lotar a geladeira? Douoal da
-        academia, gostaria de saber se quando acordar devo ingerir batata doce e
-        frango logo de primeira, preparar as marmitas e lotar a geladeira? Douu
-        um pico de insulina e jogo hipercalórico?
-      </Scroll>
+      <Scroll>{question}</Scroll>
       <span>SUA RESPOSTA</span>
       <br />
-      <Input name="resposta" type="text" />
-      <button type="button">Responder Aluno</button>
+      <Form onSubmit={handleSubmit}>
+        <Input name="resposta" type="text" />
+        <button type="submit">Responder Aluno</button>
+      </Form>
     </Container>
   );
 }
+
+Feedback.propTypes = {
+  id: PropTypes.number.isRequired,
+  question: PropTypes.string.isRequired,
+};
