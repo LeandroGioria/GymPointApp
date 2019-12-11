@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { addMonths, parseISO, isBefore } from 'date-fns';
+import { Op } from 'sequelize';
 import Enrollment from '../models/Enrollment';
 import User from '../models/User';
 import Plan from '../models/Plan';
@@ -20,6 +21,20 @@ class EnrollmentController {
 
         const enrollments = await Enrollment.findAll({
             attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+            include: [
+                {
+                    model: Plan,
+                    as: 'plan',
+                    attributes: ['title'],
+                    where: { id: { [Op.ne]: null } },
+                },
+                {
+                    model: Student,
+                    as: 'student',
+                    where: { id: { [Op.ne]: null } },
+                    attributes: ['name'],
+                },
+            ],
         });
 
         if (!enrollments) {
