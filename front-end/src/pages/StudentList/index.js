@@ -4,12 +4,15 @@ import { IoMdAdd } from 'react-icons/io';
 // import { MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import api from '../../services/api';
 
 import { Container, StudentTable, EditDelete } from './styles';
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);
+  const [currentId, setCurrentId] = useState(-1);
+  const [showDlg, setShowDlg] = useState(false);
 
   useEffect(() => {
     async function loadStudents() {
@@ -24,6 +27,10 @@ export default function StudentList() {
 
     loadStudents();
   }, []);
+
+  function deleteStudent() {
+    setShowDlg(false);
+  }
 
   return (
     <Container>
@@ -66,7 +73,27 @@ export default function StudentList() {
               </td>
               <td>
                 <EditDelete>
-                  <Link to="/">apagar</Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowDlg(true);
+                      setCurrentId(student.id);
+                    }}
+                  >
+                    apagar
+                  </button>
+                  <SweetAlert
+                    show={showDlg}
+                    warning
+                    showCancel
+                    confirmBtnBsStyle="danger"
+                    title="Você tem certeza?"
+                    onConfirm={() => deleteStudent()}
+                    onCancel={() => setShowDlg(false)}
+                    focusCancelBtn
+                  >
+                    Você irá deletar o aluno permanentemente.
+                  </SweetAlert>
                 </EditDelete>
               </td>
             </tr>
