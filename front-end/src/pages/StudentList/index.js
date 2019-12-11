@@ -6,6 +6,7 @@ import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import api from '../../services/api';
+import history from '../../services/history';
 
 import { Container, StudentTable, EditDelete } from './styles';
 
@@ -28,8 +29,12 @@ export default function StudentList() {
     loadStudents();
   }, []);
 
-  function deleteStudent() {
+  async function deleteStudent() {
+    await api.delete(`students/${currentId}`);
+    toast.success('Usuario deletado!');
+
     setShowDlg(false);
+    history.push('/');
   }
 
   return (
