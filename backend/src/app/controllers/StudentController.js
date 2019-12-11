@@ -105,7 +105,7 @@ class StudentController {
             msg: `Student ${student.name} updated!`,
         });
     }
-    
+
     async delete(req, res) {
         const isAdmin = await User.findOne({ where: { id: req.userId } });
 
