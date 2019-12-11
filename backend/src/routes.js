@@ -28,7 +28,7 @@ routes.use(authMiddleware);
 routes.get('/students', StudentController.index);
 routes.post('/students', StudentController.store);
 routes.put('/students/:name', StudentController.update);
-routes.put('/students/:id', StudentController.delete);
+routes.delete('/students/:id', StudentController.delete);
 
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);
