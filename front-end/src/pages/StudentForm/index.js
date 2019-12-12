@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
@@ -13,6 +14,7 @@ export default function StudentForm(props) {
     if (props.location.state !== undefined) {
       setStudentData(props.location.state.student);
     }
+    // eslint-disable-next-line react/destructuring-assignment
   }, [props.location.state]);
 
   async function handleSave() {

@@ -5,6 +5,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 import history from '../../services/history';
+import { formatPrice } from '../../util/format';
 import { Container, StudentTable, EditDelete } from './styles';
 
 export default function PlanList() {
@@ -68,7 +69,7 @@ export default function PlanList() {
                 <span>{plan.duration} mês</span>
               </td>
               <td>
-                <span>R$129,00</span>
+                <span>{formatPrice(plan.price)}</span>
               </td>
               <td>
                 <EditDelete edit>

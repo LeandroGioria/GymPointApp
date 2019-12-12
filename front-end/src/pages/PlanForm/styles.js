@@ -63,7 +63,7 @@ export const Button = styled.button`
   }
 `;
 
-export const StudentData = styled.table`
+export const PlanData = styled.table`
   width: 100%;
   max-width: 900px;
   border-radius: 4px;
