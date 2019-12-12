@@ -60,7 +60,9 @@ export default function StudentForm(props) {
   return (
     <Container>
       <header>
-        <strong>{studentData ? 'Edição de aluno' : 'Cadastro de aluno'}</strong>
+        <strong>
+          {studentData.id ? 'Edição de aluno' : 'Cadastro de aluno'}
+        </strong>
         <aside>
           <Link to="/students">
             <MdChevronLeft size={20} color="#fff" />

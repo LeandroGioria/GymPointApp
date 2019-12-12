@@ -59,7 +59,7 @@ export default function Plans(props) {
   return (
     <Container>
       <header>
-        <strong>Cadastro de plano</strong>
+        <strong>{planData.id ? 'Edição de plano' : 'Cadastro de plano'}</strong>
         <aside>
           <Link to="/plans">
             <MdChevronLeft size={20} color="#fff" />

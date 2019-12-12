@@ -58,7 +58,9 @@ export default function EnrollmentForm(props) {
   return (
     <Container>
       <header>
-        <strong>Cadastro de matrícula</strong>
+        <strong>
+          {enrollmentData.id ? 'Edição de matrícula' : 'Cadastro de matrícula'}
+        </strong>
         <aside>
           <Link to="/enrollments">
             <MdChevronLeft size={20} color="#fff" />
