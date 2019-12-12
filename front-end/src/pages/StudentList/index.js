@@ -70,8 +70,14 @@ export default function StudentList() {
                 <span>{student.age}</span>
               </td>
               <td>
-                <EditDelete edit>
-                  <Link to="/student/edit" edit>
+                <EditDelete edit="true">
+                  <Link
+                    to={{
+                      pathname: '/student/form',
+                      state: { student },
+                    }}
+                    edit
+                  >
                     editar
                   </Link>
                 </EditDelete>

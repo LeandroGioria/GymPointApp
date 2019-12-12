@@ -5,7 +5,6 @@ import Route from './Route';
 import SignIn from '../pages/SignIn';
 
 import StudentList from '../pages/StudentList';
-import StudentEdit from '../pages/StudentEdit';
 import StudentForm from '../pages/StudentForm';
 
 import PlanList from '../pages/PlanList';
@@ -24,7 +23,6 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={SignIn} />
       <Route path="/students" component={StudentList} isPrivate />
-      <Route path="/student/edit" component={StudentEdit} isPrivate />
       <Route path="/student/form" component={StudentForm} isPrivate />
 
       <Route path="/plans" component={PlanList} isPrivate />

@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'reactjs-popup';
-import SweetAlert from 'react-bootstrap-sweetalert';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
-import history from '../../services/history';
 import FeedBack from '../Feedback';
 import { Container, HelpOrderTable } from './styles';
 
 export default function HelpOrderList() {
   const [helpOrders, setHelpOrders] = useState([]);
-  const [showDlg, setShowDlg] = useState(false);
-  const [currentId, setCurrentId] = useState(-1);
 
   useEffect(() => {
     async function loadHelpOrders() {
