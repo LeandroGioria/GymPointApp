@@ -10,6 +10,7 @@ import { Container, Button, StudentData, Item } from './styles';
 
 export default function StudentForm(props) {
   const [studentData, setStudentData] = useState('');
+
   useEffect(() => {
     if (props.location.state !== undefined) {
       setStudentData(props.location.state.student);

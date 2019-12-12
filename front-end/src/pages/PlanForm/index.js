@@ -12,6 +12,7 @@ import { Container, Button, PlanData, Item } from './styles';
 
 export default function Plans(props) {
   const [planData, setPlanData] = useState('');
+
   useEffect(() => {
     if (props.location.state !== undefined) {
       setPlanData(props.location.state.plan);
@@ -21,7 +22,7 @@ export default function Plans(props) {
   async function handleSave() {
     try {
       if (planData.id) {
-        const response = await api.post('plans', {
+        const response = await api.put('plans', {
           id: planData.id,
           title: planData.title,
           duration: planData.duration,
@@ -76,6 +77,7 @@ export default function Plans(props) {
         <Input
           name="title"
           type="text"
+          value={planData.title}
           onChange={event =>
             setPlanData({ ...planData, title: event.target.value })
           }
@@ -86,6 +88,7 @@ export default function Plans(props) {
             <Input
               name="duration"
               type="number"
+              value={planData.duration}
               onChange={event =>
                 setPlanData({ ...planData, duration: event.target.value })
               }
@@ -96,6 +99,7 @@ export default function Plans(props) {
             <Input
               name="price"
               type="number"
+              value={planData.price}
               onChange={event =>
                 setPlanData({ ...planData, price: event.target.value })
               }

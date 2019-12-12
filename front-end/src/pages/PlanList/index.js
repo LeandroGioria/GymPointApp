@@ -73,7 +73,13 @@ export default function PlanList() {
               </td>
               <td>
                 <EditDelete edit>
-                  <Link to="/plan/edit" edit>
+                  <Link
+                    to={{
+                      pathname: '/plan/form',
+                      state: { plan },
+                    }}
+                    edit
+                  >
                     editar
                   </Link>
                 </EditDelete>
