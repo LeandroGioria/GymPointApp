@@ -63,7 +63,7 @@ export const Button = styled.button`
   }
 `;
 
-export const StudentData = styled.table`
+export const EnrollmentData = styled.table`
   width: 100%;
   max-width: 900px;
   border-radius: 4px;

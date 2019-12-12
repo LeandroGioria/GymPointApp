@@ -38,7 +38,6 @@ export default function Plans(props) {
         history.push('/plans');
       } else {
         const response = await api.post('plans', {
-          id: planData.id,
           title: planData.title,
           duration: planData.duration,
           price: planData.price,

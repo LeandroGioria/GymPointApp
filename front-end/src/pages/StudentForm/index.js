@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -15,12 +16,11 @@ export default function StudentForm(props) {
     if (props.location.state !== undefined) {
       setStudentData(props.location.state.student);
     }
-    // eslint-disable-next-line react/destructuring-assignment
   }, [props.location.state]);
 
   async function handleSave() {
-    if (studentData.id) {
-      try {
+    try {
+      if (studentData.id) {
         const response = await api.put('students', {
           id: studentData.id,
           name: studentData.name,
@@ -36,13 +36,8 @@ export default function StudentForm(props) {
 
         toast.success('Salvo com sucesso!');
         history.push('/');
-      } catch (err) {
-        toast.error('Erro ao salvar');
-      }
-    } else {
-      try {
+      } else {
         const response = await api.post('students', {
-          id: studentData.id,
           name: studentData.name,
           email: studentData.email,
           age: studentData.age,
@@ -56,9 +51,9 @@ export default function StudentForm(props) {
 
         toast.success('Salvo com sucesso!');
         history.push('/');
-      } catch (err) {
-        toast.error('Erro ao salvar');
       }
+    } catch (err) {
+      toast.error('Erro ao salvar');
     }
   }
 

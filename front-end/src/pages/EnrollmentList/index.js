@@ -84,7 +84,13 @@ export default function EnrollmentList() {
               </td>
               <td>
                 <EditDelete edit>
-                  <Link to="/plan/edit" edit>
+                  <Link
+                    to={{
+                      pathname: '/enrollment/form',
+                      state: { enrollment },
+                    }}
+                    edit
+                  >
                     editar
                   </Link>
                 </EditDelete>
