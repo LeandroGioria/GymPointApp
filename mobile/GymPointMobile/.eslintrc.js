@@ -25,7 +25,7 @@ module.exports = {
     'react',
     'prettier',
     'react-hooks',
-    'import',
+    'import-helpers',
     'jsx-a11y'
   ],
   rules: {
@@ -42,6 +42,18 @@ module.exports = {
         "no-console": ["error", { allow: ["tron"] }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
+        'import-helpers/order-imports': [
+          'warn',
+          {
+              newlinesBetween: 'always', // new line between groups
+              groups: [
+                  '/^react/',
+                  'module',
+                  '/^@shared/',
+                  ['parent', 'sibling', 'index'],
+              ],
+              alphabetize: { order: 'asc', ignoreCase: true },
+          },
   },
   settings: {
     "import/resolver": {
