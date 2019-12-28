@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 // import { Container } from './styles';
 
-export default function HelpOrder() {
+export default function Answer() {
   return (
     <View />
   );

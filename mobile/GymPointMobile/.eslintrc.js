@@ -12,7 +12,7 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    __DEV__: true
+    __DEV__: 'readonly'
   },
   parserOptions: {
     ecmaFeatures: {
@@ -48,12 +48,14 @@ module.exports = {
               newlinesBetween: 'always', // new line between groups
               groups: [
                   '/^react/',
+                  '/^styled/',
                   'module',
                   '/^@shared/',
                   ['parent', 'sibling', 'index'],
               ],
               alphabetize: { order: 'asc', ignoreCase: true },
           },
+      ],
   },
   settings: {
     "import/resolver": {
