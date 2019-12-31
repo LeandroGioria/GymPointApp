@@ -1,4 +1,7 @@
 import React from 'react';
+import { withNavigationFocus } from 'react-navigation';
+
+import { withTheme } from 'styled-components';
 
 import Background from '~/components/Background';
 import Header from '~/components/Header';
@@ -14,14 +17,21 @@ import {
   HelpHeader,
 } from './styles';
 
-export default function HelpOrderList() {
+function HelpOrderList({ navigation }) {
   return (
     <Background>
       <Container>
-        <Header />
-        <NewHelpButton>Novo pedido de auxílio</NewHelpButton>
+        <NewHelpButton
+          onPress={() => {
+            navigation.navigate('NewHelpOrder');
+          }}>
+          Novo pedido de auxílio
+        </NewHelpButton>
         <HelpList>
-          <Help>
+          <Help
+            onPress={() => {
+              navigation.navigate('Details' /* , { helpOrder: data } */);
+            }}>
             <HelpHeader>
               <Title feedback>Respondido</Title>
               <Time>Hoje ás 14h</Time>
@@ -47,28 +57,14 @@ export default function HelpOrderList() {
               ingerir batata doce e frango logo de primeira, preparar as
             </Question>
           </Help>
-          <Help>
-            <HelpHeader>
-              <Title>{0 ? 'Respondido' : 'Sem resposta'}</Title>
-              <Time>Hoje ás 14h</Time>
-            </HelpHeader>
-            <Question>
-              Olá pessoal da academia, gostaria de saber se quando acordar devo
-              ingerir batata doce e frango logo de primeira, preparar as
-            </Question>
-          </Help>
-          <Help>
-            <HelpHeader>
-              <Title>{0 ? 'Respondido' : 'Sem resposta'}</Title>
-              <Time>Hoje ás 14h</Time>
-            </HelpHeader>
-            <Question>
-              Olá pessoal da academia, gostaria de saber se quando acordar devo
-              ingerir batata doce e frango logo de primeira, preparar as
-            </Question>
-          </Help>
         </HelpList>
       </Container>
     </Background>
   );
 }
+
+HelpOrderList.navigationOptions = () => ({
+  headerTitle: props => <Header {...props} />,
+});
+
+export default withTheme(withNavigationFocus(HelpOrderList));

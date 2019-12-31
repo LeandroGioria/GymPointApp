@@ -9,6 +9,7 @@ export const Container = styled(BaseButton)`
 
   align-items: center;
   justify-content: center;
+  align-self: stretch;
 `;
 
 export const Text = styled.Text`

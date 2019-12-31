@@ -2,46 +2,39 @@ import { Platform } from 'react-native';
 
 import styled from 'styled-components/native';
 
-import Button from '~/components/Button';
-
 export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
   behavior: 'padding',
 })`
   flex: 1;
-  align-items: center;
-  padding: 0 20px;
+  margin: 20px 25px 0;
 `;
 
-export const CheckinButton = styled(Button)`
-  width: 335px;
+export const CheckinList = styled.View`
   margin-top: 20px;
 `;
 
-export const CheckinList = styled.View``;
-
+// Checkin
 export const Item = styled.View`
-  width: 335px;
-  margin-top: 20px;
-  height: 46px;
-  border-radius: 4px;
-  border: solid 1px #dddddd;
-  background: #ffffff;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  padding: 15px 20px;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+  margin-bottom: 10px;
 `;
 
 export const Time = styled.Text`
-  margin-right: 20px;
   color: #666;
   font-size: 14px;
-  font-weight: 400;
+  text-align: right;
 `;
 
 export const Text = styled.Text`
   color: #000;
   font-weight: bold;
-  font-size: 16px;
-  margin-left: 20px;
+  font-size: 14px;
 `;

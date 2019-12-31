@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 
 import styled from 'styled-components/native';
 
@@ -10,21 +11,18 @@ export const Container = styled.KeyboardAvoidingView.attrs({
 })`
   flex: 1;
   align-items: center;
+  margin: 20px 25px 0;
 `;
 
-export const NewHelpButton = styled(Button)`
-  width: 335px;
-  margin-top: 20px;
-`;
+export const NewHelpButton = styled(Button)``;
 
 export const HelpList = styled.ScrollView.attrs({
   // Change to flatlist
   showsVerticalScrollIndicator: false,
 })``;
 
-export const Help = styled.View`
+export const Help = styled(RectButton)`
   background: #fff;
-  width: 335px;
   height: 150px;
   border-radius: 4px;
   border: solid 1px #dddddd;
@@ -46,6 +44,8 @@ export const Time = styled.Text.attrs()`
   color: #666;
 `;
 
-export const Question = styled.Text`
+export const Question = styled.Text.attrs({
+  numberOfLines: 4,
+})`
   color: #666;
 `;

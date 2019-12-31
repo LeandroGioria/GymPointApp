@@ -1,13 +1,16 @@
 import React from 'react';
 import { Image } from 'react-native';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-vertical.png';
 import Background from '../../components/Background';
 import { Container, SubmitButton, Form, FormInput } from './styles';
 
 export default function SignIn() {
+  // const dispatch = useDispatch();
+  // const [id, setId] = useState();
+
   function handleSubmit() {
-    // dispatch(signInRequest(email, password));
+    //   dispatch(signInRequest(id));
   }
 
   return (

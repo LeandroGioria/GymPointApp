@@ -1,6 +1,19 @@
-import styled from 'styled-components/native';
+import React from 'react';
 
-export default styled.View`
-  background: #f5f5f5;
-  flex: 1;
-`;
+import PropTypes from 'prop-types';
+
+import { Container } from './styles';
+
+export default function Background({ loggedout, children }) {
+  return <Container loggedout={loggedout}>{children}</Container>;
+}
+
+Background.propTypes = {
+  loggedout: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
+};
+
+Background.defaultProps = {
+  loggedout: false,
+};
