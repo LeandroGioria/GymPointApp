@@ -1,10 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
 // import { Container } from './styles';
 
 export default function NewHelpOrder() {
-  return (
-    <View />
-  );
+  return <Text>NewHelpOrder</Text>;
 }
