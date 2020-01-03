@@ -24,6 +24,9 @@ export default (isSigned = false) =>
                 },
                 {
                   headerLayoutPreset: 'center',
+                  headerLeftContainerStyle: {
+                    marginLeft: 20,
+                  },
                 },
               ),
               navigationOptions: {
@@ -42,6 +45,9 @@ export default (isSigned = false) =>
                 },
                 {
                   headerLayoutPreset: 'center',
+                  headerLeftContainerStyle: {
+                    marginLeft: 20,
+                  },
                 },
               ),
               navigationOptions: {
