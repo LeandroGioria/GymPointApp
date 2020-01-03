@@ -8,7 +8,7 @@ import { Container, Text, Time } from './styles';
 
 export default function Checkin({ data }) {
   const formattedTime = useMemo(() => {
-    return formatRelative(parseISO(data.createdAt), new Date());
+    return formatRelative(parseISO(data.createdAt), new Date(), { locale: pt });
   }, [data.createdAt]);
 
   return (
