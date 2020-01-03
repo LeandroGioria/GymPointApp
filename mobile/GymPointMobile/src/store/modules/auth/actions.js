@@ -1,8 +1,6 @@
-import constants from './constants';
-
 export function signInRequest(id) {
   return {
-    type: constants.authSignInRequest,
+    type: '@auth/SIGN_IN_REQUEST',
     payload: {
       id,
     },
@@ -11,7 +9,7 @@ export function signInRequest(id) {
 
 export function signInSuccess(student) {
   return {
-    type: constants.authSignInSuccess,
+    type: '@auth/SIGN_IN_SUCCESS',
     payload: {
       student,
     },
@@ -20,6 +18,6 @@ export function signInSuccess(student) {
 
 export function signFailure() {
   return {
-    type: constants.authSignFailure,
+    type: '@auth/SIGN_FAILURE',
   };
 }

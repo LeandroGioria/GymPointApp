@@ -15,3 +15,8 @@ export const CheckinList = styled.FlatList.attrs({
 })`
   margin-top: 20px;
 `;
+
+export const Text = styled.Text`
+  margin-top: 30px;
+  align-self: center;
+`;
