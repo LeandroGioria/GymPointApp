@@ -23,18 +23,13 @@ export default (isSigned = false) =>
                   Checkins,
                 },
                 {
-                  defaultNavigationOptions: {
-                    headerTransparent: false,
-                    headerLeftContainerStyle: {
-                      marginLeft: 20,
-                    },
-                  },
+                  headerLayoutPreset: 'center',
                 },
               ),
               navigationOptions: {
                 tabBarLabel: 'Check-ins',
                 tabBarIcon: ({ tintColor }) => (
-                  <Icon name="crop-square" size={20} color={tintColor} />
+                  <Icon name="check-box" size={20} color={tintColor} />
                 ),
               },
             },
@@ -46,13 +41,7 @@ export default (isSigned = false) =>
                   NewHelpOrder,
                 },
                 {
-                  defaultNavigationOptions: {
-                    headerTransparent: false,
-                    headerTintColor: '#000',
-                    headerLeftContainerStyle: {
-                      marginLeft: 20,
-                    },
-                  },
+                  headerLayoutPreset: 'center',
                 },
               ),
               navigationOptions: {
@@ -64,6 +53,7 @@ export default (isSigned = false) =>
             },
           },
           {
+            // Bottom
             resetOnBlur: true,
             tabBarOptions: {
               keyboardHidesTabBar: true,
