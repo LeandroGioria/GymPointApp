@@ -1,31 +1,27 @@
-import React /* , { useState } */ from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
-
-// import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import { withTheme } from 'styled-components';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Background from '~/components/Background';
 import Button from '~/components/Button';
 import Header from '~/components/Header';
-/* import api from '~/services/api'; */
+import api from '~/services/api';
 
 import { Container, TextArea } from './styles';
 
-function NewHelpOrder({ navigation }) {
-  // const [question, setQuestion] = useState('');
-  // const studentId = useSelector(state => state.auth.student.id);
+export default function NewHelpOrder({ navigation }) {
+  const [question, setQuestion] = useState('');
+  const studentId = useSelector(state => state.auth.student.id);
 
   async function handleSubmit() {
     try {
-      // await api.post(`/students/${studentId}/help-orders`, {
-      //   question,
-      // });
-
+      await api.post(`/students/${studentId}/help-orders`, {
+        question,
+      });
       Alert.alert('Sucesso', 'Pedido de auxílio feito com succeso!');
-
-      navigation.navigate('List');
+      navigation.navigate('HelpOrderList');
     } catch (err) {
       err.response.data.errors.map(error =>
         Alert.alert('Falha ao criar novo pedido de auxílio', error.msg),
@@ -40,8 +36,8 @@ function NewHelpOrder({ navigation }) {
           placeholder="Inclua seu pedido de auxílio"
           placeholderTextColor="#999999"
           multiline
-          // value={question}
-          // onChangeText={setQuestion}
+          value={question}
+          onChangeText={setQuestion}
         />
         <Button onPress={handleSubmit}>Enviar pedido</Button>
       </Container>
@@ -50,7 +46,7 @@ function NewHelpOrder({ navigation }) {
 }
 
 NewHelpOrder.navigationOptions = ({ navigation }) => ({
-  headerTitle: props => <Header {...props} />,
+  headerTitle: <Header />,
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {
@@ -61,4 +57,8 @@ NewHelpOrder.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-export default withTheme(NewHelpOrder);
+NewHelpOrder.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

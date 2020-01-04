@@ -4,8 +4,6 @@ import { ActivityIndicator, Alert } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import { useSelector } from 'react-redux';
 
-import { withTheme } from 'styled-components';
-
 import Background from '~/components/Background';
 import CheckinButton from '~/components/Button';
 import Checkin from '~/components/Checkin';
@@ -23,7 +21,6 @@ function Checkins({ isFocused }) {
 
   async function loadCheckins(nextPage = 1) {
     try {
-      console.tron.log('load');
       const response = await api.get(
         `/students/${studentId}/checkins?page=${nextPage}`,
       );
@@ -32,7 +29,6 @@ function Checkins({ isFocused }) {
         nextPage >= 2 ? [...checkins, ...response.data] : response.data,
       );
 
-      setCheckins(response.data);
       setLoading(false);
       setPage(nextPage);
       setRefreshing(false);
@@ -67,7 +63,7 @@ function Checkins({ isFocused }) {
     try {
       const response = await api.post(`/students/${studentId}/checkins`);
       Alert.alert('Check-In', 'Check-in efetuado com sucesso!');
-      setCheckins([...checkins, response.data]);
+      setCheckins([...checkins, response.data.reverse()]);
     } catch (err) {
       Alert.alert('Erro', 'Limite de 5 check-ins por semana atingido');
     }
@@ -86,7 +82,7 @@ function Checkins({ isFocused }) {
         ) : (
           <CheckinList
             data={checkins}
-            keyExtractor={item => String(item.id)}
+            keyExtractor={(item, index) => String(index)}
             renderItem={({ item }) => <Checkin data={item} />}
             onEndReached={handleOnEndReached}
             onEndReachedThreshold={0.1}
@@ -100,7 +96,7 @@ function Checkins({ isFocused }) {
 }
 
 Checkins.navigationOptions = {
-  headerTitle: props => <Header {...props} />,
+  headerTitle: <Header />,
 };
 
-export default withTheme(withNavigationFocus(Checkins));
+export default withNavigationFocus(Checkins);

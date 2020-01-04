@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import { withNavigation } from 'react-navigation';
 
-import { withTheme } from 'styled-components';
-
 import { formatRelative, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
@@ -39,4 +37,4 @@ HelpOrder.propTypes = {
   }).isRequired,
 };
 
-export default withNavigation(withTheme(HelpOrder));
+export default withNavigation(HelpOrder);

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 import { formatRelative, parseISO } from 'date-fns';
@@ -48,7 +48,7 @@ export default function Details({ navigation }) {
 }
 
 Details.navigationOptions = ({ navigation }) => ({
-  headerTitle: props => <Header {...props} />,
+  headerTitle: <Header />,
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {
@@ -58,3 +58,9 @@ Details.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+Details.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

@@ -8,11 +8,8 @@ import { Container, Text, Time } from './styles';
 
 export default function Checkin({ data }) {
   const formattedTime = useMemo(() => {
-    console.tron.log(
-      formatRelative(parseISO(data.createdAt), new Date(), { locale: pt }),
-    );
     return formatRelative(parseISO(data.createdAt), new Date(), { locale: pt });
-  }, [data.createdAt]);
+  }, [data]);
 
   return (
     <Container>

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import { useSelector } from 'react-redux';
-
-import { withTheme } from 'styled-components';
-
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 import HelpOrder from '~/components/HelpOrder';
@@ -24,9 +22,10 @@ function HelpOrderList({ navigation, isFocused }) {
       `students/${studentId}/help-orders?page=${nextPage}`,
     );
 
-    console.tron.log(response.data);
     setHelpOrders(
-      nextPage >= 2 ? [...helpOrders, ...response.data] : response.data,
+      nextPage >= 2
+        ? [...helpOrders, ...response.data.reverse()]
+        : response.data.reverse(),
     );
     setPage(nextPage);
     setLoading(false);
@@ -43,14 +42,14 @@ function HelpOrderList({ navigation, isFocused }) {
   }, [isFocused]);
 
   async function handleOnEndReached() {
-    // const nextPage = page + 1;
-    // loadHelpOrders(nextPage);
+    const nextPage = page + 1;
+    loadHelpOrders(nextPage);
   }
 
   async function handleOnRefreshList() {
-    // setRefreshing(true);
-    // setHelpOrders([]);
-    // loadHelpOrders();
+    setRefreshing(true);
+    setHelpOrders([]);
+    loadHelpOrders();
   }
 
   return (
@@ -68,7 +67,7 @@ function HelpOrderList({ navigation, isFocused }) {
         ) : (
           <HelpList
             data={helpOrders}
-            keyExtractor={item => String(item.id)}
+            keyExtractor={(item, index) => String(index)}
             renderItem={({ item }) => <HelpOrder data={item} />}
             onEndReached={handleOnEndReached}
             onEndReachedThreshold={0.1}
@@ -82,7 +81,13 @@ function HelpOrderList({ navigation, isFocused }) {
 }
 
 HelpOrderList.navigationOptions = () => ({
-  headerTitle: props => <Header {...props} />,
+  headerTitle: <Header />,
 });
 
-export default withTheme(withNavigationFocus(HelpOrderList));
+HelpOrderList.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default withNavigationFocus(HelpOrderList);
