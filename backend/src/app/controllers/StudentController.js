@@ -13,14 +13,22 @@ import User from '../models/User';
 // destroy – Remove Item
 class StudentController {
     async index(req, res) {
-        const isAdmin = User.findOne({ where: { id: req.userId } });
+        // const isAdmin = User.findOne({ where: { id: req.userId } });
 
-        if (!isAdmin) {
-            return res.status(401).json({
-                error: 'You can only list plans as administrator',
-            });
+        // if (!isAdmin) {
+        //     return res.status(401).json({
+        //         error: 'You can only list plans as administrator',
+        //     });
+        // }
+
+        if (req.params.id) {
+            const students = await Student.findByPk(req.params.id);
+            if (!students) {
+                return res.status(401).json({ error: 'No student found' });
+            }
+
+            return res.json(students);
         }
-
         const students = await Student.findAll({
             where: {
                 name: {
@@ -28,8 +36,7 @@ class StudentController {
                 },
             },
         });
-
-        if (!students) {
+        if (students.length <= 0) {
             return res.status(401).json({ error: 'No students found' });
         }
 

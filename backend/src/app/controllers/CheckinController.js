@@ -8,9 +8,9 @@ class CheckinController {
         const { student_id } = req.params;
         const checkins = await Checkin.findAll({
             where: { student_id },
-            attributes: ['student_id', 'createdAt'],
+            attributes: ['student_id', 'createdAt', 'id'],
         });
-        if (!checkins || checkins.length === 0) {
+        if (!checkins) {
             return res.status(401).json({ error: 'No checkins registered' });
         }
 
@@ -57,7 +57,7 @@ class CheckinController {
             return res.status(400).json({ error: 'Fail on checkin' });
         }
 
-        return res.json({ ok: `Success checkin for student: ${student.name}` });
+        return res.json(checkin);
     }
 }
 

@@ -22,13 +22,13 @@ routes.post('/students/:student_id/checkins', CheckinController.store);
 routes.post('/students/:student_id/help-orders', HelpOrderController.store);
 routes.get('/students/:student_id/help-orders', HelpOrderController.show);
 
-// Only the routes below will use the middleware auth
-routes.use(authMiddleware);
-
-routes.get('/students', StudentController.index);
+routes.get('/students/:id', StudentController.index);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
 routes.delete('/students/:id', StudentController.delete);
+
+// Only the routes below will use the middleware auth
+routes.use(authMiddleware);
 
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);
