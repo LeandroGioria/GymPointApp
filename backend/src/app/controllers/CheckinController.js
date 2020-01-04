@@ -5,14 +5,24 @@ import Student from '../models/Student';
 
 class CheckinController {
     async index(req, res) {
+        const { page = 1 } = req.query;
         const { student_id } = req.params;
-        const checkins = await Checkin.findAll({
-            where: { student_id },
-            attributes: ['student_id', 'createdAt', 'id'],
-        });
-        if (!checkins) {
-            return res.status(401).json({ error: 'No checkins registered' });
+
+        const student = await Student.findByPk(student_id);
+
+        if (!student) {
+            return res
+                .status(404)
+                .json({ errors: [{ msg: 'Aluno não encontrado.' }] });
         }
+
+        const checkins = await Checkin.findAll({
+            where: {
+                student_id,
+            },
+            limit: 10,
+            offset: (page - 1) * 10,
+        });
 
         return res.json(checkins);
     }

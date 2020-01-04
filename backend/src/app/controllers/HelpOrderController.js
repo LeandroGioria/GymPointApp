@@ -41,12 +41,15 @@ class HelpOrderController {
     }
 
     async show(req, res) {
+        const { page = 1 } = req.query;
         const { student_id } = req.params;
 
-        const orders = await HelpOrder.findAll({ where: { student_id } });
-        if (!orders || orders.length === 0) {
-            return res.status(400).json({ error: 'No orders for this user' });
-        }
+        const orders = await HelpOrder.findAll({
+            where: { student_id },
+            limit: 10,
+            offset: (page - 1) * 10,
+        });
+
         return res.json(orders);
     }
 
