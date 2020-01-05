@@ -28,6 +28,11 @@ export default function Routes() {
 
       <Route path="/enrollments" component={EnrollmentList} isPrivate />
       <Route path="/enrollment/form" component={EnrollmentForm} isPrivate />
+      <Route
+        path="/enrollment/:studentId"
+        component={EnrollmentForm}
+        isPrivate
+      />
 
       <Route path="/helps" component={HelpOrderList} isPrivate />
       <Route path="/help/feedback" component={Feedback} isPrivate />

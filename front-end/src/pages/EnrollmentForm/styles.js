@@ -1,110 +1,101 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 900px;
-  margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-
-  header {
+  width: 100%;
+  max-width: 950px;
+  min-width: 550px;
+  margin: 30px auto;
+  form#form-enrollments {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 28px;
-
-    strong {
-      height: 29px;
-      color: #444444;
-      font-size: 24px;
-      font-weight: 700;
+    flex-direction: column;
+    padding: 5px 30px 30px;
+    background: #fff;
+    align-items: flex-start;
+    label {
+      width: 100%;
+      margin: 25px 0 5px;
     }
+    label + label {
+      margin-left: 16px;
+    }
+  }
+`;
 
-    aside {
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  h1 {
+    color: #333;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    button {
       display: flex;
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 112px;
-        height: 36px;
-        border-radius: 4px;
-        background: #ccc;
-        border: 0;
-        margin-right: 16px;
-
-        strong {
-          display: flex;
-          align-items: center;
-          color: #ffffff;
-          font-size: 14px;
-          font-weight: bold;
-          padding: 0 8px;
-        }
+      align-items: center;
+      padding: 0 10px;
+      width: 112px;
+      height: 36px;
+      border: 0;
+      border-radius: 4px;
+      color: #fff;
+      background: #ccc;
+      &:hover {
+        background: ${darken(0.04, '#ccc')};
+      }
+      span {
+        padding-left: 10px;
+        font-weight: bold;
+      }
+    }
+    button + button {
+      background: #ee4d64;
+      margin-left: 16px;
+      &:hover {
+        background: ${darken(0.03, '#ee4d64')};
       }
     }
   }
 `;
 
-export const Button = styled.button`
-  width: 112px;
-  border-radius: 4px;
-  border: 0;
-  background: #ee4d64;
-  padding-left: 16px;
-  display: flex;
-  align-items: center;
-
-  span {
-    color: #fff;
-    padding-left: 8px;
-    font-size: 14px;
+export const Student = styled.div`
+  width: 100%;
+  padding-top: 25px;
+  label {
     font-weight: bold;
-    color: #fff;
+    color: #333;
   }
 `;
 
-export const EnrollmentData = styled.table`
-  width: 100%;
-  max-width: 900px;
-  border-radius: 4px;
-  background: #fff;
+export const Info = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 30px 30px;
-
-  strong {
-    color: #444;
-    font-size: 14px;
+  flex-direction: row;
+  label {
     font-weight: bold;
-    margin-bottom: 7px;
-  }
-
-  input {
-    margin-bottom: 20px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    height: 45px;
-
-    &::placeholder {
-      padding-left: 15px;
-      color: #999;
-      font-size: 16px;
-      width: 150px;
-    }
-  }
-
-  div {
-    display: flex;
+    color: #333;
     width: 100%;
   }
-`;
-
-export const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  & + div {
-    margin-left: 15px;
+  input[name='start_date'],
+  input[name='end_date'],
+  input[name='price'] {
+    width: 100%;
+    height: 45px;
+    margin: 7px 0 0;
+    padding: 0 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  @media (max-width: 588px) {
+    width: 100%;
+    flex-direction: column;
+    label {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0 0 !important;
+    }
   }
 `;

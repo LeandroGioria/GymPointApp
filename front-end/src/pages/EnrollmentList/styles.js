@@ -74,3 +74,5 @@ export const EditDelete = styled.div`
     color: ${props => (props.edit ? '#4d85ee' : '#de3b3b')};
   }
 `;
+
+export const DeleteButton = styled.button``;

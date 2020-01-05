@@ -6,7 +6,8 @@ import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
-import { Container, EnrollmentTable, EditDelete } from './styles';
+import { Container, EnrollmentTable, EditDelete, DeleteButton } from './styles';
+import history from '../../services/history';
 
 export default function EnrollmentList() {
   const [enrollments, setEnrollments] = useState([]);
@@ -24,6 +25,11 @@ export default function EnrollmentList() {
 
     loadEnrollments();
   }, []);
+
+  const handleEdit = studentId => {
+    history.push(`enrollment/${studentId}`);
+  };
+
   return (
     <Container>
       <header>
@@ -35,70 +41,71 @@ export default function EnrollmentList() {
           </Link>
         </aside>
       </header>
-      <EnrollmentTable>
-        <thead>
-          <tr>
-            <th>ALUNO</th>
-            <th>PLANO</th>
-            <th>INÍCIO</th>
-            <th>TÉRMINO</th>
-            <th>ATIVA</th>
-          </tr>
-        </thead>
-        <tbody>
-          {enrollments.map(enrollment => (
+
+      {!enrollments.length ? (
+        <p>Nenhuma matrícula encontrada...</p>
+      ) : (
+        <EnrollmentTable>
+          <thead>
             <tr>
-              <td>
-                <span>{enrollment.student.name}</span>
-              </td>
-              <td>
-                <span>{enrollment.plan.title}</span>
-              </td>
-              <td>
-                <span>
-                  {format(
-                    parseISO(enrollment.start_date),
-                    "dd 'de' MMMM 'de' yyyy",
-                    {
-                      locale: pt,
-                    }
-                  )}
-                </span>
-              </td>
-              <td>
-                <span>
-                  {format(
-                    parseISO(enrollment.end_date),
-                    "dd 'de' MMMM 'de' yyyy",
-                    {
-                      locale: pt,
-                    }
-                  )}
-                </span>
-              </td>
-              <td>
-                <MdCheckCircle
-                  size={20}
-                  color={enrollment.active ? '#42cb59' : '#ccc'}
-                />
-              </td>
-              <td>
-                <EditDelete edit>
-                  <Link
-                    to={{
-                      pathname: '/enrollment/form',
-                      state: { enrollment },
-                    }}
-                    edit
-                  >
-                    editar
-                  </Link>
-                </EditDelete>
-              </td>
+              <th>ALUNO</th>
+              <th>PLANO</th>
+              <th>INÍCIO</th>
+              <th>TÉRMINO</th>
+              <th>ATIVA</th>
             </tr>
-          ))}
-        </tbody>
-      </EnrollmentTable>
+          </thead>
+          <tbody>
+            {enrollments.map(enrollment => (
+              <tr>
+                <td>
+                  <span>{enrollment.student.name}</span>
+                </td>
+                <td>
+                  <span>{enrollment.plan.title}</span>
+                </td>
+                <td>
+                  <span>
+                    {format(
+                      parseISO(enrollment.start_date),
+                      "dd 'de' MMMM 'de' yyyy",
+                      {
+                        locale: pt,
+                      }
+                    )}
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    {format(
+                      parseISO(enrollment.end_date),
+                      "dd 'de' MMMM 'de' yyyy",
+                      {
+                        locale: pt,
+                      }
+                    )}
+                  </span>
+                </td>
+                <td>
+                  <MdCheckCircle
+                    size={20}
+                    color={enrollment.active ? '#42cb59' : '#ccc'}
+                  />
+                </td>
+                <td>
+                  <EditDelete edit>
+                    <DeleteButton
+                      onClick={() => handleEdit(enrollment.student_id)}
+                    >
+                      editar
+                    </DeleteButton>
+                  </EditDelete>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </EnrollmentTable>
+      )}
     </Container>
   );
 }
