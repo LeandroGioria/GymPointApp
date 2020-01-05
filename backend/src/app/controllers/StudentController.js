@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { Op } from 'sequelize';
+import { Op, fn, where, col } from 'sequelize';
 
 import Student from '../models/Student';
 import User from '../models/User';
@@ -13,34 +13,53 @@ import User from '../models/User';
 // destroy – Remove Item
 class StudentController {
     async index(req, res) {
-        // const isAdmin = User.findOne({ where: { id: req.userId } });
+        const isAdmin = User.findOne({ where: { id: req.userId } });
 
-        // if (!isAdmin) {
-        //     return res.status(401).json({
-        //         error: 'You can only list plans as administrator',
-        //     });
-        // }
-
-        if (req.params.id) {
-            const students = await Student.findByPk(req.params.id);
-            if (!students) {
-                return res.status(401).json({ error: 'No student found' });
-            }
-
-            return res.json(students);
+        if (!isAdmin) {
+            return res.status(401).json({
+                error: 'You can only list plans as administrator',
+            });
         }
-        const students = await Student.findAll({
-            where: {
-                name: {
-                    [Op.like]: `%${req.query.name}%`,
-                },
-            },
+
+        const { name } = req.query;
+        let students;
+
+        if (name) {
+            students = await Student.findAll({
+                where: where(fn('lower', col('name')), {
+                    [Op.like]: fn('lower', `%${name}%`),
+                }),
+            });
+        } else {
+            students = await Student.findAll();
+        }
+
+        const studentsPublicData = students.map(student => {
+            return {
+                id: student.id,
+                name: student.name,
+                email: student.email,
+                age: student.age,
+                weight: student.weight,
+                height: student.height,
+            };
         });
-        if (students.length <= 0) {
-            return res.status(401).json({ error: 'No students found' });
+
+        return res.json(studentsPublicData);
+    }
+
+    async show(req, res) {
+        const { id } = req.params;
+
+        const student = await Student.findByPk(id);
+
+        if (!student) {
+            return res
+                .status(404)
+                .json({ errors: [{ msg: 'Student not found.' }] });
         }
 
-        return res.json(students);
+        return res.json(student);
     }
 
     async store(req, res) {
