@@ -8,7 +8,7 @@
 ### Requirements
 To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/), [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/) and [Redis](https://redis.io/) installed on your computer.
 </br></br>
-Start you docker application.<br/>
+Start your docker application.<br/>
 Install the follow docker images (Redis, Postgres).<br/>
 
 ```bash
