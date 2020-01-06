@@ -81,4 +81,3 @@ yarn android
 ```
 <blockquote>This part can be tricky, if you face some error, try running yarn start --reset-cache and yarn android again.</blockquote>
 
-[LinkedIn](https://www.linkedin.com/in/leandrogioria/)
