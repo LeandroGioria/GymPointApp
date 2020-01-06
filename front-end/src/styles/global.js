@@ -40,4 +40,8 @@ export default createGlobalStyle`
     button {
         cursor: pointer;
     }
+
+    input {
+        padding-left: 20px;
+    }
 `;

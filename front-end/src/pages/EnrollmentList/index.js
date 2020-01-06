@@ -96,7 +96,7 @@ export default function EnrollmentList() {
                   <EditDelete edit>
                     <button
                       type="button"
-                      onClick={() => handleEdit(enrollments.student_id)}
+                      onClick={() => handleEdit(enrollment.student_id)}
                     >
                       editar
                     </button>

@@ -86,7 +86,6 @@ export const StudentData = styled.table`
     height: 45px;
 
     &::placeholder {
-      padding-left: 15px;
       color: #999;
       font-size: 16px;
       width: 150px;

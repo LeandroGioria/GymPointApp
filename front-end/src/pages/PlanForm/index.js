@@ -11,7 +11,7 @@ import { formatPrice } from '../../util/format';
 import { Container, Button, PlanData, Item } from './styles';
 
 export default function Plans(props) {
-  const [planData, setPlanData] = useState('');
+  const [planData, setPlanData] = useState({ price: 0 });
 
   useEffect(() => {
     if (props.location.state !== undefined) {
@@ -78,7 +78,10 @@ export default function Plans(props) {
           type="text"
           value={planData.title}
           onChange={event =>
-            setPlanData({ ...planData, title: event.target.value })
+            setPlanData({
+              ...planData,
+              title: event.target.value,
+            })
           }
         />
         <div>

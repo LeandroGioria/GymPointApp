@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signOut } from '../../store/modules/auth/actions';
 
@@ -17,15 +17,23 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <Link to="/">
+          <NavLink to="/">
             <img src={logo} alt="GymPoint" />
             <strong>GYMPOINT</strong>
-          </Link>
+          </NavLink>
           <div>
-            <Link to="/students">ALUNOS</Link>
-            <Link to="/plans">PLANOS</Link>
-            <Link to="/enrollments">MATRÍCULAS</Link>
-            <Link to="/helps">PEDIDOS DE AUXÍLIO</Link>
+            <NavLink activeStyle={{ color: '#000' }} to="/students">
+              ALUNOS
+            </NavLink>
+            <NavLink activeStyle={{ color: '#000' }} to="/plans">
+              PLANOS
+            </NavLink>
+            <NavLink activeStyle={{ color: '#000' }} to="/enrollments">
+              MATRÍCULAS
+            </NavLink>
+            <NavLink activeStyle={{ color: '#000' }} to="/helps">
+              PEDIDOS DE AUXÍLIO
+            </NavLink>
           </div>
         </nav>
 

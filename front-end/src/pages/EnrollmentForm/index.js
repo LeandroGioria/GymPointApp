@@ -121,7 +121,6 @@ export default function EnrollmentForm() {
         await api.put(`enrollments/${studentId}`, { ...data });
 
         toast.success('Matrícula atualizada com sucesso');
-        history.push('/enrollments');
       } else {
         const data = {
           start_date: enrollments.start_date,
@@ -132,8 +131,8 @@ export default function EnrollmentForm() {
         await api.post('enrollments', { ...data });
 
         toast.success('Matrícula realizada com sucesso');
-        history.push(`/enrollments`);
       }
+      history.push(`/enrollments`);
     } catch (err) {
       toast.error(
         (err.response && err.response.data.error) ||
