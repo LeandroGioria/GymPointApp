@@ -37,7 +37,7 @@ cd GymPointApp/backend
 yarn
 
 ```
-In order to connect to the database, you will need to enter the access informations into a .env file, based on a .env.example file that is provided in the backend folder, change the variables according to your environment.
+If necessary you can enter with your informations into the .env file that is provided in the backend folder, you can change the variables according to your environment.
 ```bash
 # run migrations
 yarn sequelize db:migrate
