@@ -8,6 +8,7 @@ import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { addMonths, parseISO } from 'date-fns';
 import debounce from 'debounce-promise';
 import * as Yup from 'yup';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Loading from '../../components/Loading';
 import history from '../../services/history';
