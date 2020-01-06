@@ -63,7 +63,7 @@ Use this credentials to access the web application
 <blockquote><strong>email:</strong> admin@gympoint.com</blockquote>
 <blockquote> <strong>senha:</strong> 123456</blockquote>
 
-for mobile you need the Android emulator with the SDK installed or IOS emulator and the react-native cli.
+For mobile you need the Android emulator with the SDK installed or IOS emulator and the react-native cli.
 
 <blockquote>The project was developed and tested on Android device</blockquote>
 
@@ -79,8 +79,6 @@ yarn start
 yarn android
 
 ```
-<blockquote>this part can be tricky, if you face some error, try running yarn start --reset-cache and yarn android again.</blockquote>
-
-## :mailbox_with_mail: Get in touch!
+<blockquote>This part can be tricky, if you face some error, try running yarn start --reset-cache and yarn android again.</blockquote>
 
 [LinkedIn](https://www.linkedin.com/in/leandrogioria/)
