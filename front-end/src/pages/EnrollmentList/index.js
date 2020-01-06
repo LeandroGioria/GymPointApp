@@ -6,7 +6,7 @@ import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
-import { Container, EnrollmentTable, EditDelete, DeleteButton } from './styles';
+import { Container, EnrollmentTable, EditDelete } from './styles';
 import history from '../../services/history';
 
 export default function EnrollmentList() {
@@ -26,9 +26,9 @@ export default function EnrollmentList() {
     loadEnrollments();
   }, []);
 
-  const handleEdit = studentId => {
+  function handleEdit(studentId) {
     history.push(`enrollment/${studentId}`);
-  };
+  }
 
   return (
     <Container>
@@ -94,11 +94,12 @@ export default function EnrollmentList() {
                 </td>
                 <td>
                   <EditDelete edit>
-                    <DeleteButton
-                      onClick={() => handleEdit(enrollment.student_id)}
+                    <button
+                      type="button"
+                      onClick={() => handleEdit(enrollments.student_id)}
                     >
                       editar
-                    </DeleteButton>
+                    </button>
                   </EditDelete>
                 </td>
               </tr>

@@ -70,9 +70,10 @@ export const EnrollmentTable = styled.table`
 `;
 
 export const EditDelete = styled.div`
-  a {
+  button {
     color: ${props => (props.edit ? '#4d85ee' : '#de3b3b')};
+    border: none;
+    background: #fff;
+    font-weight: bold;
   }
 `;
-
-export const DeleteButton = styled.button``;

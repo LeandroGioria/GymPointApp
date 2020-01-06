@@ -71,15 +71,17 @@ export default function StudentList() {
               </td>
               <td>
                 <EditDelete edit="true">
-                  <Link
-                    to={{
-                      pathname: '/student/form',
-                      state: { student },
+                  <button
+                    type="button"
+                    onClick={() => {
+                      history.push({
+                        pathname: '/student/form',
+                        state: { student },
+                      });
                     }}
-                    edit
                   >
                     editar
-                  </Link>
+                  </button>
                 </EditDelete>
               </td>
               <td>

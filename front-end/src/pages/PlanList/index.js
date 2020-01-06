@@ -73,15 +73,14 @@ export default function PlanList() {
               </td>
               <td>
                 <EditDelete edit>
-                  <Link
-                    to={{
-                      pathname: '/plan/form',
-                      state: { plan },
+                  <button
+                    type="button"
+                    onClick={() => {
+                      history.push({ pathname: '/plan/form', state: { plan } });
                     }}
-                    edit
                   >
                     editar
-                  </Link>
+                  </button>
                 </EditDelete>
               </td>
               <td>
