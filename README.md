@@ -16,7 +16,7 @@ Install the follow docker images (Redis, Postgres).<br/>
 docker run --name imageName -p 6379:6379 -d -t redis:alpine
 
 # install Postgres image (if you don't specify an username it will be postgres by default)
-docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
 
 # start Redis
 docker start imageName
@@ -39,6 +39,9 @@ yarn
 ```
 If necessary you can enter with your informations into the .env file that is provided in the backend folder, you can change the variables according to your environment.
 ```bash
+# Create a database called gympoint
+yarn sequelize db:migrate
+
 # run migrations
 yarn sequelize db:migrate
 
@@ -47,6 +50,9 @@ yarn sequelize db:seed:all
 
 # run api
 yarn dev & yarn queue
+
+# in another tab in the terminal run the queue
+yarn queue
 
 # in another tab in the terminal install the frontend dependencies and run it 
 cd GymPointApp/frontend
