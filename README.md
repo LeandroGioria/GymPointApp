@@ -16,7 +16,7 @@ Install the follow docker images (Redis, Postgres).<br/>
 docker run --name imageName -p 6379:6379 -d -t redis:alpine
 
 # install Postgres image (if you don't specify an username it will be postgres by default)
-docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d gympoint_database
+docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 
 # start Redis
 docker start imageName
