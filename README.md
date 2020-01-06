@@ -4,19 +4,6 @@
     GymPoint Fullstack app
 </h1>
 
-Steps to run GymPoint system:
-
-Running background:
-1. yarn dev;
-2. yarn queue;
-
-Running web:
-1. yarn start;
-login: admin@gympoint.com
-password: 123456
-
-running mobile:
-
 ## Running the application locally
 ### Requirements
 To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/), [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/) and [Redis](https://redis.io/) installed on your computer.
