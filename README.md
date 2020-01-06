@@ -19,17 +19,16 @@ running mobile:
 
 ## Running the application locally
 ### Requirements
-To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/) v12.13.1 or higher, [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/) and [Redis](https://redis.io/) installed on your computer.
+To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/), [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/) and [Redis](https://redis.io/) installed on your computer.
 <br>
 Install the follow docker images (Redis, Postgres).<br />
-Those images already contains some datas to make tests easier.
 
 ```bash
 # install Redis image
 docker run --name imageName -p 6379:6379 -d -t redis:alpine
 
 # install Postgres image (if you don't specify an username it will be postgres by default)
-docker run --name imagename -e POSTGRES_PASSWORD=yourPassword -p 5432:5432 -d postgres
+docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d gympoint_database
 
 # start Redis
 docker start imageName
@@ -41,10 +40,10 @@ docker start imageName
 Now clone the repository and install the dependencies.
 ```bash
 # to clone the repository
-git clone https://github.com/StefanoSaffran/gympoint.git
+git clone https://github.com/LeandroGioria/GymPointApp.git
 
 # go into the backend folder
-cd gympoint/backend
+cd GymPointApp/backend
 
 #install the backend dependencies
 yarn
@@ -62,7 +61,7 @@ yarn sequelize db:seed:all
 yarn dev & yarn queue
 
 # in another tab in the terminal install the frontend dependencies and run it 
-cd frontend
+cd GymPointApp/frontend
 yarn
 yarn start
 ```
@@ -72,11 +71,11 @@ Use this credentials to access the web application
 
 for mobile you need the Android emulator with the SDK installed or IOS emulator and the react-native cli.
 
-<blockquote>The project was developed and tested on Android emulator</blockquote>
+<blockquote>The project was developed and tested on Android device</blockquote>
 
 ```bash
 # install dependencies and run the mobile
-cd mobile
+cd mobile/GymPointMobile
 yarn
 
 # first open the emulator and start the react native server
@@ -90,4 +89,4 @@ yarn android
 
 ## :mailbox_with_mail: Get in touch!
 
-[LinkedIn](https://www.linkedin.com/in/leandrogioria/) | [Website](https://stefanosaffran.com)
+[LinkedIn](https://www.linkedin.com/in/leandrogioria/)
