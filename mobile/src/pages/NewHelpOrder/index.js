@@ -33,9 +33,14 @@ export default function NewHelpOrder({ navigation }) {
     <Background>
       <Container>
         <TextArea
+          autoCapitalize="none"
+          underlineColorAndroid="transparent"
           placeholder="Inclua seu pedido de auxílio"
-          placeholderTextColor="#999999"
+          autoCorrect={false}
           multiline
+          auto
+          numberOfLines={9}
+          returnKeyType="send"
           value={question}
           onChangeText={setQuestion}
         />

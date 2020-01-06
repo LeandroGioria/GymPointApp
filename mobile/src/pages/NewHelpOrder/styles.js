@@ -5,7 +5,10 @@ export const Container = styled.SafeAreaView`
   margin: 20px 25px 0;
 `;
 
-export const TextArea = styled.TextInput`
+export const TextArea = styled.TextInput.attrs({
+  textAlignVertical: 'top',
+  padding: 0,
+})`
   height: 300px;
   background: #fff;
   border: 1px solid #dddddd;
