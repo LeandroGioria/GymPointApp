@@ -17,9 +17,9 @@ password: 123456
 
 running mobile:
 
-## :information_source: How to run the application locally
+## Running the application locally
 ### Requirements
-To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/) v12.13.1 or higher, [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) installed on your computer. I strongly recommend using [Docker](https://www.docker.com/) to run the databases.
+To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/) v12.13.1 or higher, [Yarn](https://yarnpkg.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/) and [Redis](https://redis.io/) installed on your computer.
 <br>
 If you install docker, follow this steps to install and run the docker images.
 
@@ -87,10 +87,6 @@ yarn android
 ```
 <blockquote>this part can be tricky, if you face some error, try running yarn start --reset-cache and yarn android again.</blockquote>
 
-## :page_facing_up: License
-
-This project is under the MIT license. See the [LICENSE](https://github.com/StefanoSaffran/gympoint/blob/master/LICENSE) for more information
-
 ## :mailbox_with_mail: Get in touch!
 
-[LinkedIn](https://www.linkedin.com/in/stefanosaffran/) | [Website](https://stefanosaffran.com)
+[LinkedIn](https://www.linkedin.com/in/leandrogioria/) | [Website](https://stefanosaffran.com)
