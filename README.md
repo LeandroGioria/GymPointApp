@@ -16,7 +16,7 @@ Install the follow docker images (Redis, Postgres).<br/>
 docker run --name imageName -p 6379:6379 -d -t redis:alpine
 
 # install Postgres image (if you don't specify an username it will be postgres by default)
-docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
+docker run --name imagename -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 
 # start Redis
 docker start imageName
@@ -49,7 +49,7 @@ yarn sequelize db:migrate
 yarn sequelize db:seed:all
 
 # run api
-yarn dev & yarn queue
+yarn dev
 
 # in another tab in the terminal run the queue
 yarn queue
@@ -69,7 +69,7 @@ for mobile you need the Android emulator with the SDK installed or IOS emulator 
 
 ```bash
 # install dependencies and run the mobile
-cd mobile/GymPointMobile
+cd mobile
 yarn
 
 # first open the emulator and start the react native server
