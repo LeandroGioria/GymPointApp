@@ -40,8 +40,8 @@ class StudentController {
                 name: student.name,
                 email: student.email,
                 age: student.age,
-                weight: student.weight,
-                height: student.height,
+                peso: student.peso,
+                altura: student.altura,
             };
         });
 

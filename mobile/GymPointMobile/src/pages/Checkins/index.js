@@ -63,7 +63,7 @@ function Checkins({ isFocused }) {
     try {
       const response = await api.post(`/students/${studentId}/checkins`);
       Alert.alert('Check-In', 'Check-in efetuado com sucesso!');
-      setCheckins([...checkins, response.data.reverse()]);
+      setCheckins([...checkins, response.data]);
     } catch (err) {
       Alert.alert('Erro', 'Limite de 5 check-ins por semana atingido');
     }

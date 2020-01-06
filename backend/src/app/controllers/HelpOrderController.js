@@ -33,6 +33,11 @@ class HelpOrderController {
         }
 
         const { student_id } = req.params;
+        const student = Student.findByPk(student_id);
+
+        if (!student) {
+            return res.status(400).json({ error: 'Invalid Student ' });
+        }
         const { question } = req.body;
 
         const order = await HelpOrder.create({ student_id, question });
