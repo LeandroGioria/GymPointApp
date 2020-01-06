@@ -20,7 +20,14 @@ class EnrollmentController {
         }
 
         const enrollments = await Enrollment.findAll({
-            attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+            attributes: [
+                'id',
+                'start_date',
+                'end_date',
+                'price',
+                'active',
+                'student_id',
+            ],
             include: [
                 {
                     model: Plan,
@@ -42,6 +49,31 @@ class EnrollmentController {
         }
 
         return res.json(enrollments);
+    }
+
+    async show(req, res) {
+        const { studentId } = req.params;
+
+        const enrollment = await Enrollment.findOne({
+            where: {
+                student_id: studentId,
+            },
+
+            include: [
+                {
+                    model: Student,
+                    as: 'student',
+                    attributes: ['name'],
+                },
+                {
+                    model: Plan,
+                    as: 'plan',
+                    attributes: ['title', 'duration'],
+                },
+            ],
+        });
+
+        return res.json(enrollment);
     }
 
     async store(req, res) {
@@ -115,10 +147,8 @@ class EnrollmentController {
 
     async update(req, res) {
         const schema = Yup.object().shape({
-            id: Yup.number().required(),
-            student_id: Yup.number(),
-            plan_id: Yup.number(),
-            start_date: Yup.date(),
+            plan_id: Yup.number().required(),
+            start_date: Yup.date().required(),
         });
 
         if (!(await schema.isValid(req.body))) {
@@ -133,7 +163,12 @@ class EnrollmentController {
             });
         }
 
-        const enrollment = await Enrollment.findByPk(req.body.id);
+        const { studentId } = req.params;
+        const enrollment = await Enrollment.findOne({
+            where: {
+                student_id: studentId,
+            },
+        });
 
         if (!enrollment) {
             return res.status(400).json({ error: 'Enrollment not found' });
@@ -166,7 +201,7 @@ class EnrollmentController {
             price,
         });
 
-        const student = await Student.findByPk(req.body.student_id);
+        const student = await Student.findByPk(enrollment.student_id);
 
         if (!student) {
             return res.status(400).json({ error: 'Student not found' });

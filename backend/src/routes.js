@@ -25,12 +25,13 @@ routes.get('/students/:student_id/help-orders', HelpOrderController.show);
 routes.get('/students/:id', StudentController.show);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
-routes.delete('/students/:id', StudentController.delete);
 
 // Only the routes below will use the middleware auth
 routes.use(authMiddleware);
 
 routes.get('/students/', StudentController.index);
+
+routes.delete('/students/:id', StudentController.delete);
 
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);
@@ -38,8 +39,9 @@ routes.put('/plans', PlanController.update);
 routes.delete('/plans/:id', PlanController.delete);
 
 routes.get('/enrollments', EnrollmentController.index);
+routes.get('/enrollments/:studentId', EnrollmentController.show);
 routes.post('/enrollments', EnrollmentController.store);
-routes.put('/enrollments', EnrollmentController.update);
+routes.put('/enrollments/:studentId', EnrollmentController.update);
 routes.delete('/enrollments/:id', EnrollmentController.delete);
 
 routes.get('/help-orders', HelpOrderController.index);
