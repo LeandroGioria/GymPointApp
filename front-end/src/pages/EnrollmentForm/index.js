@@ -103,9 +103,7 @@ export default function EnrollmentForm() {
         }
       );
     } catch (err) {
-      err.inner.forEach((error: ValidationError) => {
-        toast.error(error.message);
-      });
+      toast.error('Erro no servidor');
       return;
     }
 
@@ -191,7 +189,7 @@ export default function EnrollmentForm() {
                 <MdKeyboardArrowLeft size={20} color="#fff" />
                 <span>VOLTAR</span>
               </button>
-              <button type="submit">
+              <button type="submit" form="form-enrollments">
                 <MdCheck size={20} color="#fff" />
                 <span>SALVAR</span>
               </button>
