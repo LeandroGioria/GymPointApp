@@ -67,6 +67,8 @@ For mobile you need the Android emulator with the SDK installed or IOS emulator 
 
 <blockquote>The project was developed and tested on Android device</blockquote>
 
+You need to change the "GymPointApp/mobile/src/services/api.js" file to use the IP that is running your backend. 
+
 ```bash
 # install dependencies and run the mobile
 cd mobile
