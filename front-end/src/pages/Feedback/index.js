@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Input, Form } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 import history from '../../services/history';
 import { Container, Scroll } from './styles';
 
 export default function Feedback({ id, question }) {
-  async function handleSubmit({ resposta }) {
-    await api.put(`help-orders/${id}/answer`, { answer: resposta });
+  const [answer, setAnswer] = useState('');
+
+  async function handleSubmit() {
+    await api.put(`help-orders/${id}/answer`, { answer });
     toast.success('Resposta enviada!');
     history.push('/');
     history.push('/helps');
@@ -21,7 +23,11 @@ export default function Feedback({ id, question }) {
       <span>SUA RESPOSTA</span>
       <br />
       <Form onSubmit={handleSubmit}>
-        <Input name="resposta" type="text" />
+        <textarea
+          name="answer"
+          rows="4"
+          onChange={({ target }) => setAnswer(target.value)}
+        />
         <button type="submit">Responder Aluno</button>
       </Form>
     </Container>

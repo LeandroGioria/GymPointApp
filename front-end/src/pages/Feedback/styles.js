@@ -29,6 +29,17 @@ export const Container = styled.div`
     font-weight: bold;
     margin-top: 21px;
   }
+
+  textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    height: 127px;
+    border-radius: 4px;
+    padding: 13px 15px;
+    resize: none;
+    font-size: 16px;
+    color: #666;
+  }
 `;
 
 export const Scroll = styled(PerfectScrollbar)`
